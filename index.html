@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Espíritu del Reciclaje - I.E Jose de la Torre Ugarte</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Video de fondo -->
+    <div class="video-bg">
+      <video autoplay loop muted playsinline id="bgVideo">
+        <source src="uploads/video-fondo.mp4" type="video/mp4" />
+        Tu navegador no soporta videos HTML5.
+      </video>
+    </div>
+
+    <!-- Logo y nombre del colegio arriba a la izquierda -->
+    <div class="logo-box">
+      <img src="uploads/logo.jpg" alt="Logo Colegio" class="logo-img" />
+      <span class="school-text">I.E Jose de la Torre Ugarte</span>
+    </div>
+
+    <!-- Contenedor principal flex -->
+    <div class="main-flex-container">
+      <!-- Texto principal alineado a la izquierda con animaciones -->
+      <div class="main-text">
+        <h1 class="title animated-title">ESPÍRITU DEL RECICLAJE</h1>
+        <h2 class="subtitle animated-subtitle">
+          Cuidar el planeta, es cuidar nuestro futuro
+        </h2>
+        <p class="description animated-description">
+          Este proyecto busca promover la conciencia ambiental en los
+          estudiantes de la <b>I.E Jose de la Torre Ugarte</b> a través de la
+          creatividad, la tecnología y el reciclaje.<br />
+          Descubre cómo cada acción cuenta y cómo puedes ser parte del cambio
+          con realidad aumentada, accesorios reciclados y mensajes de nuestros
+          animales emblemáticos.
+        </p>
+        <button class="btn-dashboard animated-btn" id="btnDashboard">
+          Ir al Dashboard
+        </button>
+      </div>
+
+      <!-- Carrusel de imágenes de animales -->
+      <div class="animal-carousel" id="animalCarousel">
+        <div class="animal-img-wrapper" id="animalImgWrapper">
+          <img
+            src="uploads/animal1.jpg"
+            alt="animal1"
+            class="animal-img"
+            id="carouselImage"
+          />
+          <div class="animal-name" id="carouselName">Gato andino</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra verde decorativa abajo -->
+    <div class="bottom-bar"></div>
+
+    <!-- Canvas de transición 1 -->
+    <canvas
+      id="transitionCanvas1"
+      width="1280"
+      height="720"
+      style="
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        pointer-events: none;
+        z-index: 99999;
+        display: none;
+        background: transparent;
+      "
+    ></canvas>
+    <video
+      id="transitionVideo1"
+      src="uploads/transcicion1.mp4"
+      style="display: none"
+      preload="auto"
+      muted
+    ></video>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

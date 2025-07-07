@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Animales en Peligro</title>
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="uploads/logo.jpg" alt="Logo" class="sidebar-logo" />
+        <span class="sidebar-school">I.E Jose de la Torre Ugarte</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#general" class="sidebar-link active">General</a>
+        <a href="#gato-andino" class="sidebar-link">Gato Andino</a>
+        <a href="#pava-aliblanca" class="sidebar-link">Pava Aliblanca</a>
+        <a href="#mono-choro" class="sidebar-link"
+          >Mono Choro de Cola Amarilla</a
+        >
+        <a href="#rana-titicaca" class="sidebar-link">Rana del Titicaca</a>
+        <a href="#condor-andino" class="sidebar-link">Cóndor Andino</a>
+      </nav>
+    </aside>
+    <main class="dashboard-content">
+      <section class="animal-section" id="general">
+        <h2>General</h2>
+        <div class="animal-content">
+          <!-- Información general aquí -->
+        </div>
+      </section>
+      <section class="animal-section" id="gato-andino">
+        <h2>Gato Andino</h2>
+        <div class="animal-content"></div>
+      </section>
+      <section class="animal-section" id="pava-aliblanca">
+        <h2>Pava Aliblanca</h2>
+        <div class="animal-content"></div>
+      </section>
+      <section class="animal-section" id="mono-choro">
+        <h2>Mono Choro de Cola Amarilla</h2>
+        <div class="animal-content"></div>
+      </section>
+      <section class="animal-section" id="rana-titicaca">
+        <h2>Rana del Titicaca</h2>
+        <div class="animal-content"></div>
+      </section>
+      <section class="animal-section" id="condor-andino">
+        <h2>Cóndor Andino</h2>
+        <div class="animal-content"></div>
+      </section>
+    </main>
+    <!-- Canvas de transición 2 -->
+    <canvas
+      id="transitionCanvas2"
+      width="1280"
+      height="720"
+      style="
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        pointer-events: none;
+        z-index: 99999;
+        display: none;
+        background: transparent;
+      "
+    ></canvas>
+    <video
+      id="transitionVideo2"
+      src="uploads/transcicion2.mp4"
+      style="display: none"
+      preload="auto"
+      muted
+    ></video>
+
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>
