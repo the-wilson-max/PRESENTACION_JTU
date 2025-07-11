@@ -1,0 +1,324 @@
+:root {
+  --main-bg-gradient: linear-gradient(
+    135deg,
+    #bfffe0 0%,
+    #54c571 70%,
+    #234d20 100%
+  );
+  --glass-bg: rgba(255, 255, 255, 0.13);
+  --glass-border: rgba(84, 197, 113, 0.13);
+  --uiverse-btn1: #54c571;
+  --uiverse-btn2: #bfffe0;
+  --uiverse-btn3: #234d20;
+  --uiverse-btn-shadow: 0 8px 32px #54c57144, 0 0 18px #bfffe0;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  background: var(--main-bg-gradient);
+  overflow: hidden;
+  position: relative;
+}
+
+.bg-animated {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  position: relative;
+}
+
+/* Glassmorphism card */
+.card-presentadora {
+  background: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  border-radius: 32px;
+  box-shadow: 0 8px 40px #54c57144, 0 0 30px #bfffe0aa;
+  backdrop-filter: blur(22px) saturate(160%);
+  padding: 56px 38px 38px 38px;
+  min-width: 320px;
+  max-width: 470px;
+  width: 96vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  opacity: 0;
+  animation: fadeInDown 1.1s 0.15s forwards cubic-bezier(0.5, 1.44, 0.36, 0.88);
+}
+
+/* Circle con nombre animado */
+.circle-presentadora {
+  width: 134px;
+  height: 134px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #eafff6 40%, #bfffe0 100%);
+  box-shadow: 0 0 24px 7px #bfffe088, 0 2px 44px 4px #54c57144;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: avatarPop 1.1s cubic-bezier(0.5, 1.44, 0.36, 0.88);
+}
+
+.presentadora-nombre {
+  color: #234d20;
+  font-size: 1.09rem;
+  text-align: center;
+  font-weight: 700;
+  padding: 0 8px;
+  letter-spacing: 1.1px;
+  filter: drop-shadow(0 0 7px #bfffe0cc);
+  z-index: 1;
+  position: relative;
+  display: inline-block;
+  line-height: 1.25;
+}
+
+.emoji-wave {
+  font-size: 1.5rem;
+  margin-left: 6px;
+  vertical-align: middle;
+  animation: waveHand 1.8s infinite;
+  filter: drop-shadow(0 0 6px #bfffe0) drop-shadow(0 0 3px #54c571);
+}
+
+@keyframes waveHand {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(19deg);
+  }
+  20% {
+    transform: rotate(-12deg);
+  }
+  30% {
+    transform: rotate(20deg);
+  }
+  40% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes avatarPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.09);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.presenter-title {
+  font-size: 1.21rem;
+  font-weight: bold;
+  color: #234d2099;
+  margin-bottom: 18px;
+  letter-spacing: 1.5px;
+  background: linear-gradient(90deg, #54c571 60%, #bfffe0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 9px #bfffe0);
+  text-align: center;
+  opacity: 0;
+  animation: glowText 1.2s 0.6s forwards;
+}
+
+@keyframes glowText {
+  from {
+    opacity: 0;
+    filter: drop-shadow(0 0 0 #bfffe0);
+  }
+  to {
+    opacity: 1;
+    filter: drop-shadow(0 0 16px #bfffe0);
+  }
+}
+
+.introduction {
+  margin-bottom: 26px;
+  text-align: justify;
+  color: #214d2a;
+  font-size: 1.12rem;
+  font-weight: 500;
+  line-height: 1.6;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 16px 18px;
+  border-radius: 17px;
+  box-shadow: 0 2px 12px #54c57122;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+.uiverse-btn {
+  background: linear-gradient(
+    90deg,
+    var(--uiverse-btn1) 0%,
+    var(--uiverse-btn2) 100%
+  );
+  color: #234d20;
+  font-size: 1.01rem;
+  padding: 0.93rem 2.5rem;
+  border: none;
+  border-radius: 2rem;
+  box-shadow: var(--uiverse-btn-shadow), 0 0 20px #bfffe0;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  transition: background 0.2s, color 0.2s, transform 0.14s, box-shadow 0.2s;
+  opacity: 0;
+  transform: scale(0.92);
+  animation: btnGlow 1.4s 1.3s forwards, pulseBtn 2.4s infinite alternate;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.uiverse-btn:before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -120%;
+  width: 300%;
+  height: 250%;
+  background: linear-gradient(120deg, #bfffe0 0%, #54c571 100%);
+  opacity: 0.22;
+  transform: rotate(-20deg);
+  animation: btnShine 2.5s linear infinite;
+  z-index: 1;
+}
+@keyframes btnShine {
+  0% {
+    left: -120%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+@keyframes pulseBtn {
+  0% {
+    box-shadow: var(--uiverse-btn-shadow), 0 0 10px #bfffe0;
+  }
+  100% {
+    box-shadow: 0 8px 32px #54c571bb, 0 0 30px #caffc2;
+  }
+}
+@keyframes btnGlow {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Speech bubble */
+.speech-bubble {
+  position: absolute;
+  left: 50%;
+  bottom: 109px;
+  transform: translateX(-50%);
+  min-width: 220px;
+  max-width: 320px;
+  background: linear-gradient(120deg, #bfffe0 60%, #fff 100%);
+  color: #234d20;
+  border-radius: 25px;
+  padding: 18px 22px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-shadow: 0 2px 16px #54c57144, 0 0 24px #bfffe088;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.32s;
+  z-index: 100;
+  text-align: center;
+  border: 2px solid #54c57144;
+}
+.speech-bubble.active {
+  opacity: 1;
+  pointer-events: auto;
+  animation: bubblePop 0.7s cubic-bezier(0.51, 1.44, 0.36, 0.88);
+}
+@keyframes bubblePop {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.7);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.12);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+/* Animaciones fadeIn y fadeInDown */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .card-presentadora {
+    padding: 22px 5vw 18px 5vw;
+    min-width: 0;
+    max-width: 99vw;
+  }
+  .speech-bubble {
+    font-size: 1rem;
+    min-width: 170px;
+    max-width: 97vw;
+  }
+  .circle-presentadora {
+    width: 90px;
+    height: 90px;
+  }
+  .presentadora-nombre {
+    font-size: 0.93rem;
+  }
+}

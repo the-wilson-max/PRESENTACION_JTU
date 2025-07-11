@@ -23,59 +23,13 @@
         <a href="#condor-andino" class="sidebar-link">Cóndor Andino</a>
       </nav>
     </aside>
-    <main class="dashboard-content">
-      <section class="animal-section" id="general">
-        <h2>General</h2>
-        <div class="animal-content">
-          <!-- Información general aquí -->
-        </div>
-      </section>
-      <section class="animal-section" id="gato-andino">
-        <h2>Gato Andino</h2>
-        <div class="animal-content"></div>
-      </section>
-      <section class="animal-section" id="pava-aliblanca">
-        <h2>Pava Aliblanca</h2>
-        <div class="animal-content"></div>
-      </section>
-      <section class="animal-section" id="mono-choro">
-        <h2>Mono Choro de Cola Amarilla</h2>
-        <div class="animal-content"></div>
-      </section>
-      <section class="animal-section" id="rana-titicaca">
-        <h2>Rana del Titicaca</h2>
-        <div class="animal-content"></div>
-      </section>
-      <section class="animal-section" id="condor-andino">
-        <h2>Cóndor Andino</h2>
-        <div class="animal-content"></div>
-      </section>
+    <main class="dashboard-content" id="main-content">
+      <!-- Aquí se cargará general.html u otros archivos -->
     </main>
     <!-- Canvas de transición 2 -->
-    <canvas
-      id="transitionCanvas2"
-      width="1280"
-      height="720"
-      style="
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover;
-        pointer-events: none;
-        z-index: 99999;
-        display: none;
-        background: transparent;
-      "
-    ></canvas>
-    <video
-      id="transitionVideo2"
-      src="uploads/transcicion2.mp4"
-      style="display: none"
-      preload="auto"
-      muted
-    ></video>
+    <div id="imageOverlay">
+      <img src="uploads/FONDO.png" alt="Fondo de carga" />
+    </div>
 
     <script src="js/dashboard.js"></script>
   </body>

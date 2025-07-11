@@ -1,50 +1,43 @@
-// Transición 2 en dashboard.html al cargar la página
 window.addEventListener("DOMContentLoaded", () => {
-  const video = document.getElementById("transitionVideo2");
-  const canvas = document.getElementById("transitionCanvas2");
-  const ctx = canvas.getContext("2d");
-  canvas.style.display = "block";
-  canvas.style.opacity = "1";
-
-  function resizeCanvas() {
-    canvas.width = video.videoWidth || 1280;
-    canvas.height = video.videoHeight || 720;
-  }
-  if (video.readyState >= 1) {
-    resizeCanvas();
-  } else {
-    video.onloadedmetadata = resizeCanvas;
-  }
-
-  video.currentTime = 0;
-  video.play();
-
-  let animationId;
-  function render() {
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const d = frame.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const r = d[i],
-        g = d[i + 1],
-        b = d[i + 2];
-      if (g > 110 && r < 100 && b < 100 && g > r * 1.3 && g > b * 1.3) {
-        d[i + 3] = 0;
-      }
-    }
-    ctx.putImageData(frame, 0, 0);
-    if (!video.paused && !video.ended) {
-      animationId = requestAnimationFrame(render);
-    }
-  }
-  video.onplay = () => render();
-
-  video.onended = () => {
-    cancelAnimationFrame(animationId);
-    canvas.style.transition = "opacity 0.7s";
-    canvas.style.opacity = 0;
+  const overlay = document.getElementById("imageOverlay");
+  // Esperamos brevemente antes de desvanecer
+  setTimeout(() => {
+    overlay.style.opacity = "0";
     setTimeout(() => {
-      canvas.style.display = "none";
-    }, 700);
-  };
+      overlay.style.display = "none";
+    }, 1200); // Tiempo de animación
+  }, 500); // Tiempo visible inicial
+});
+// Cargar contenido HTML externo en el contenedor
+function cargarContenido(ruta) {
+  fetch(ruta)
+    .then((response) => response.text())
+    .then((html) => {
+      document.getElementById("main-content").innerHTML = html;
+    })
+    .catch((error) => {
+      console.error("Error al cargar el contenido:", error);
+    });
+}
+
+// Cargar general.html por defecto al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+  cargarContenido("general.html");
+
+  // Manejar clics en el menú
+  document.querySelectorAll(".sidebar-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      // Marcar el link activo
+      document
+        .querySelectorAll(".sidebar-link")
+        .forEach((l) => l.classList.remove("active"));
+      link.classList.add("active");
+
+      // Obtener el nombre del archivo según el ID del href
+      const id = link.getAttribute("href").substring(1); // elimina el #
+      cargarContenido(`${id}.html`);
+    });
+  });
 });
