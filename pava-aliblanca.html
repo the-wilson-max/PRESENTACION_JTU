@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pava Aliblanca - Ave Misteriosa de los Bosques Secos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6B8F71; /* Verde bosque */
+            --secondary: #D4B483; /* Beige arena */
+            --accent: #A5CAD2; /* Azul claro */
+            --light: #F5F5F0; /* Fondo claro */
+            --dark: #3D3D2B; /* Texto oscuro */
+            --highlight: #E8D174; /* Amarillo dorado */
+            --gradient-1: linear-gradient(135deg, #6B8F71 0%, #A5CAD2 100%);
+            --gradient-2: linear-gradient(135deg, #D4B483 0%, #E8D174 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 90% 10%, rgba(165, 202, 210, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 10% 90%, rgba(212, 180, 131, 0.1) 0%, transparent 20%);
+        }
+
+        header {
+            background: var(--gradient-1), 
+                        url('https://www.sernanp.gob.pe/documents/10181/272241/pava-aliblanca.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 1rem 3rem;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease;
+            background: linear-gradient(135deg, #FFFFFF, #E8D174);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.3s both;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid var(--primary);
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(107, 143, 113, 0.2);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-1);
+            border-radius: 3px;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .img-container {
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .img-container::before {
+            content: '🪶 Pava Aliblanca';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .img-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .img-container img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .img-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .img-caption {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .map-container {
+            height: 400px;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid var(--secondary);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .conservation-status {
+            background-color: rgba(212, 180, 131, 0.1);
+            padding: 1.5rem;
+            border-left: 5px solid var(--primary);
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .conservation-status h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .fact-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-bottom: 3px solid var(--highlight);
+        }
+
+        .fact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(107, 143, 113, 0.15);
+        }
+
+        .fact-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .fact-card h3 i {
+            margin-right: 0.8rem;
+            color: var(--primary);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid var(--accent);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            background: var(--gradient-1);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            clip-path: polygon(0 20%, 50% 0, 100% 20%, 100% 100%, 0 100%);
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        li::before {
+            content: '🪶';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        /* Animaciones adicionales */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Efecto de aparición al hacer scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Botón flotante */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Efecto de plumas */
+        .feather {
+            position: absolute;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236B8F71"><path d="M22 2s-7 4-11 10-5 9-5 9-5-2-5-2-1 3-4 3-3-5-3-5V2s7 4 11 10 5 9 5 9 5-2 5-2 1 3 4 3 3-5 3-5V2z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            .facts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="floating">Pava Aliblanca</h1>
+        <p class="subtitle">El ave emblemática de los bosques secos del noroeste peruano</p>
+    </header>
+
+    <div class="container">
+        <section id="introduccion" class="fade-in">
+            <h2><i class="fas fa-feather"></i> Introducción</h2>
+            <p>La Pava Aliblanca (Penelope albipennis) es una de las aves más raras y amenazadas del Perú. Endémica de los bosques secos del noroeste peruano, esta especie fue considerada extinta por casi 100 años hasta su redescubrimiento en 1977.</p>
+            
+            <div class="img-container pulse">
+                <img src="data:image/jpeg;base64,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" alt="Pava Aliblanca en su hábitat natural">
+            </div>
+            
+            <p>Con una población estimada de menos de 350 individuos en estado silvestre, la Pava Aliblanca está clasificada como "En Peligro Crítico" por la UICN y es considerada una de las aves más amenazadas de América del Sur.</p>
+        </section>
+
+        <section id="descubrimiento" class="fade-in">
+            <h2><i class="fas fa-history"></i> Historia de su Redescubrimiento</h2>
+            <p>La Pava Aliblanca fue descrita científicamente por primera vez en 1877 por el naturalista Ladislao Taczanowski, basándose en especímenes encontrados en la región de Tumbes. Sin embargo, después de 1880 no se volvieron a registrar ejemplares vivos.</p>
+            
+            <p>Durante casi un siglo se creyó extinta hasta que en 1977, el ornitólogo Gustavo del Solar y el agricultor Sebastián Chinchay redescubrieron la especie en la Quebrada San Isidro, en el departamento de Lambayeque.</p>
+            
+            <div class="img-container">
+                <img src="https://www.zoochat.com/community/media/pava-aliblanca-penelope-albipennis.486619/full?d=1589812561" alt="Distribución de la Pava Aliblanca">
+                <p class="img-caption">Área de distribución actual de la Pava Aliblanca en el noroeste peruano</p>
+            </div>
+            
+            <p>Este redescubrimiento fue considerado uno de los hallazgos ornitológicos más importantes del siglo XX en América Latina.</p>
+        </section>
+
+        <section id="habitat" class="fade-in">
+            <h2><i class="fas fa-tree"></i> Hábitat y Distribución</h2>
+            <p>La Pava Aliblanca habita exclusivamente en los bosques secos del noroeste peruano, entre los 300 y 1,300 metros sobre el nivel del mar. Sus territorios actuales incluyen:</p>
+            
+            <ul>
+                <li>Reserva Ecológica Chaparrí (Lambayeque)</li>
+                <li>Área de Conservación Privada Laquipampa (Lambayeque)</li>
+                <li>Bosque de Pomac (Lambayeque)</li>
+                <li>Quebrada San Isidro (Lambayeque)</li>
+                <li>Área de Conservación Privada Bosques Secos de Salitral (Piura)</li>
+            </ul>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15905631.819952317!2d-82.5!3d-6.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91e8605342744385%3A0x3d3c6dc1394a7fc7!2sAmazon%20Rainforest!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            
+            <p>Prefiere áreas con árboles altos como el algarrobo y el hualtaco, donde encuentra alimento y protección. Su presencia está estrechamente ligada a la conservación de estos bosques secos.</p>
+        </section>
+
+        <section id="extincion" class="fade-in">
+            <h2><i class="fas fa-exclamation-triangle"></i> Amenazas y Conservación</h2>
+            
+            <div class="conservation-status">
+                <h3>Estado de Conservación: En Peligro Crítico (UICN)</h3>
+                <p>La población total de Pavas Aliblancas se estima en menos de 350 individuos y su hábitat sigue disminuyendo.</p>
+            </div>
+            
+            <h3 style="margin-bottom: 1rem;">Principales amenazas:</h3>
+            
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h3><i class="fas fa-fire"></i> Pérdida de hábitat</h3>
+                    <p>Deforestación para agricultura, ganadería y carbón vegetal destruye su frágil ecosistema.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-gun"></i> Caza furtiva</h3>
+                    <p>Aunque protegida, es cazada por su carne y por considerarse una plaga para cultivos.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-egg"></i> Baja tasa reproductiva</h3>
+                    <p>Solo pone 2-3 huevos por año y muchos polluelos no sobreviven.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-dog"></i> Depredación</h3>
+                    <p>Perros asilvestrados y otros depredadores amenazan huevos y crías.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-temperature-high"></i> Cambio climático</h3>
+                    <p>Altera los patrones de lluvia y sequía en su hábitat ya frágil.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-road"></i> Fragmentación</h3>
+                    <p>Carreteras y desarrollo dividen y aíslan sus poblaciones.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="video" class="fade-in">
+            <h2><i class="fas fa-video"></i> Documental sobre la Pava Aliblanca</h2>
+            <p>Conoce más sobre esta fascinante ave a través de este video:</p>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://youtube.com/embed/mBShiNsiu9s" title="Documental Pava Aliblanca" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section id="conservacion" class="fade-in">
+            <h2><i class="fas fa-hands-helping"></i> Esfuerzos de Conservación</h2>
+            <p>En Perú, varias organizaciones trabajan para proteger a la Pava Aliblanca:</p>
+            
+            <ul>
+                <li><strong>Asociación Cracidae Perú:</strong> Lidera programas de reproducción en cautiverio</li>
+                <li><strong>SERNANP:</strong> Protege su hábitat en áreas naturales protegidas</li>
+                <li><strong>Reserva Ecológica Chaparrí:</strong> Primer área privada de conservación para la especie</li>
+                <li><strong>Comunidades locales:</strong> Participan en monitoreo y ecoturismo</li>
+            </ul>
+            
+            <p>La Pava Aliblanca está protegida por ley en Perú (Decreto Supremo N° 034-2004-AG) que la declara especie en peligro crítico.</p>
+        </section>
+    </div>
+
+    <footer class="fade-in">
+        <p>© 2023 Conservación de la Pava Aliblanca - Perú</p>
+        <p>Información científica actualizada a junio 2023</p>
+    </footer>
+
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Efecto de aparición al hacer scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const appearOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            appearOnScroll.observe(element);
+        });
+
+        // Botón de scroll arriba
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Efecto de hover en las tarjetas
+        const factCards = document.querySelectorAll('.fact-card');
+        
+        factCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('i');
+                icon.classList.add('fa-bounce');
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('i');
+                icon.classList.remove('fa-bounce');
+            });
+        });
+
+        // Efecto de parallax en el header
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const header = document.querySelector('header');
+            header.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+
+        // Animación de tipeo para el título
+        const title = document.querySelector('h1');
+        const titleText = title.textContent;
+        title.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < titleText.length) {
+                title.textContent += titleText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        };
+        
+        setTimeout(typeWriter, 500);
+
+        // Crear efecto de plumas flotantes
+        function createFeather() {
+            const feather = document.createElement('div');
+            feather.className = 'feather';
+            
+            const size = Math.random() * 30 + 20;
+            feather.style.width = `${size}px`;
+            feather.style.height = `${size}px`;
+            
+            feather.style.left = `${Math.random() * 100}vw`;
+            feather.style.top = `${Math.random() * 100}vh`;
+            
+            feather.style.transform = `rotate(${Math.random() * 360}deg)`;
+            feather.style.opacity = Math.random() * 0.5 + 0.1;
+            
+            document.body.appendChild(feather);
+            
+            // Animación
+            const duration = Math.random() * 10 + 10;
+            feather.style.animation = `float ${duration}s linear infinite`;
+            
+            // Eliminar después de un tiempo
+            setTimeout(() => {
+                feather.remove();
+            }, duration * 1000);
+        }
+
+        // Crear plumas periódicamente
+        setInterval(createFeather, 3000);
+        
+        // Crear algunas plumas iniciales
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createFeather, i * 600);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mono Choro de Cola Amarilla - Primate Andino en Peligro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8C5E24; /* Café oscuro */
+            --secondary: #F2C53D; /* Amarillo cola */
+            --accent: #6B8F71; /* Verde bosque */
+            --light: #F5F0E6; /* Fondo claro */
+            --dark: #3D2B1E; /* Texto oscuro */
+            --highlight: #D9A441; /* Amarillo dorado */
+            --gradient-1: linear-gradient(135deg, #8C5E24 0%, #F2C53D 100%);
+            --gradient-2: linear-gradient(135deg, #6B8F71 0%, #8C5E24 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(242, 197, 61, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(140, 94, 36, 0.1) 0%, transparent 20%);
+        }
+
+        header {
+            background: var(--gradient-1), 
+                        url('https://www.sernanp.gob.pe/documents/10181/272241/mono-choro-cola-amarilla.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 1rem 3rem;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease;
+            background: linear-gradient(135deg, #FFFFFF, #F2C53D);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.3s both;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-right: 5px solid var(--primary);
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(140, 94, 36, 0.2);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2 i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-1);
+            border-radius: 3px;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .img-container {
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .img-container::before {
+            content: '🐵 Mono Choro';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .img-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .img-container img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .img-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .img-caption {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: var(--primary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .map-container {
+            height: 400px;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid var(--secondary);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .conservation-status {
+            background-color: rgba(242, 197, 61, 0.1);
+            padding: 1.5rem;
+            border-left: 5px solid var(--primary);
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .conservation-status h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .fact-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-top: 3px solid var(--highlight);
+        }
+
+        .fact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(140, 94, 36, 0.15);
+        }
+
+        .fact-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .fact-card h3 i {
+            margin-right: 0.8rem;
+            color: var(--primary);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid var(--accent);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            background: var(--gradient-1);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            clip-path: polygon(0 15%, 50% 0, 100% 15%, 100% 100%, 0 100%);
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        li::before {
+            content: '🐵';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        /* Animaciones adicionales */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .swing {
+            animation: swing 3s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* Efecto de aparición al hacer scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Botón flotante */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Efecto de bananas */
+        .banana {
+            position: absolute;
+            font-size: 1.5rem;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.2;
+            animation: floatBanana 10s linear infinite;
+        }
+
+        @keyframes floatBanana {
+            0% { 
+                transform: translateY(100vh) rotate(0deg);
+                left: 10%;
+            }
+            100% { 
+                transform: translateY(-100px) rotate(360deg);
+                left: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            .facts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .hormiga {
+  position: fixed;
+  left: -50px;
+  width: 100px;
+  height:100px;
+  background-image: url('uploads/hormiga.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 9999;
+  transform: rotate(90deg); /* ajusta si la imagen no apunta a la derecha */
+  animation: caminarDerecha 10s linear forwards;
+  opacity: 1;
+  transition: opacity 1s ease; /* animación de desvanecimiento */
+}
+
+@keyframes caminarDerecha {
+  0% {
+    left: -50px;
+  }
+  100% {
+    left: 100vw;
+  }
+}
+
+.leaf-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.leaf {
+  position: absolute;
+  top: -100px;
+  right: 0;
+  width: var(--size);
+  height: auto;
+  animation: fall 10s linear infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes fall {
+  0% {
+    transform: translateX(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateX(-100px) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translateX(-200px) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translateX(-300px) rotate(270deg) scale(1.2);
+  }
+  100% {
+    transform: translate(-400px, 100vh) rotate(360deg) scale(1);
+  }
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div class="leaf-container">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 1s;  --size: 70px; left: 10%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 2s;  --size: 50px; left: 25%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 3s;  --size: 60px; left: 40%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 4s;  --size: 55px; left: 55%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 5s;  --size: 45px; left: 70%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 6s;  --size: 65px; left: 85%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 7s;  --size: 50px; left: 5%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 8s;  --size: 40px; left: 20%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 9s;  --size: 70px; left: 35%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 10s; --size: 60px; left: 50%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 11s; --size: 45px; left: 65%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 12s; --size: 55px; left: 80%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 13s; --size: 50px; left: 90%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 14s; --size: 60px; left: 15%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 15s; --size: 70px; left: 30%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 16s; --size: 40px; left: 45%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 17s; --size: 65px; left: 60%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 18s; --size: 50px; left: 75%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 19s; --size: 55px; left: 95%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 20s; --size: 45px; left: 12%;">
+</div>
+    <header>
+        <h1 class="floating">Mono Choro de Cola Amarilla</h1>
+        <p class="subtitle">El primate endémico de los Andes peruanos en peligro crítico</p>
+    </header>
+
+    <div class="container">
+        <section id="introduccion" class="fade-in">
+            <h2><i class="fas fa-paw"></i> Introducción</h2>
+            <p>El Mono Choro de Cola Amarilla (Oreonax flavicauda) es un primate endémico de los Andes peruanos y una de las especies de mono más amenazadas del mundo. Descubierto científicamente en 1812, fue considerado extinto por más de 100 años hasta su redescubrimiento en 1974.</p>
+            
+            <div class="img-container swing">
+                <img src="https://elcomercio.pe/resizer/v2/TJDND3GH6FC6BPLWMN4P36UXNA.jpg?auth=6bfbe81dd5ce11afd29cac4e7b4be909f1f44410475c47b245191122eceeb8cb&width=1980&height=1080&quality=75&smart=true" alt="Mono Choro de Cola Amarilla en su hábitat natural">
+            </div>
+            
+            <p>Con una población estimada de menos de 250 individuos maduros, está clasificado como "En Peligro Crítico" por la UICN y es considerado el primate más amenazado de Perú.</p>
+        </section>
+
+        <section id="descubrimiento" class="fade-in">
+            <h2><i class="fas fa-history"></i> Historia de su Redescubrimiento</h2>
+            <p>El Mono Choro de Cola Amarilla fue descrito por primera vez en 1812 por Alexander von Humboldt, basándose en pieles encontradas en la región de Chachapoyas. Sin embargo, después de 1926 no se volvieron a registrar avistamientos confirmados.</p>
+            
+            <p>En 1974, el primatólogo Russell Mittermeier redescubrió la especie en el departamento de Amazonas, confirmando que aún existía en estado silvestre. Este hallazgo fue considerado uno de los descubrimientos zoológicos más importantes del siglo XX en Perú.</p>
+            
+            <div class="img-container">
+                <img src="data:image/jpeg;base64,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" alt="Distribución del Mono Choro de Cola Amarilla">
+                <p class="img-caption">Área de distribución actual del Mono Choro de Cola Amarilla en los Andes peruanos</p>
+            </div>
+            
+            <p>Desde entonces, se han identificado pequeñas poblaciones en áreas remotas de Amazonas, San Martín y La Libertad.</p>
+        </section>
+
+        <section id="habitat" class="fade-in">
+            <h2><i class="fas fa-mountain"></i> Hábitat y Distribución</h2>
+            <p>El Mono Choro de Cola Amarilla habita exclusivamente en los bosques nubosos de los Andes peruanos, entre los 1,500 y 2,700 metros sobre el nivel del mar. Sus territorios actuales incluyen:</p>
+            
+            <ul>
+                <li>Parque Nacional Río Abiseo (San Martín)</li>
+                <li>Bosque de Protección Alto Mayo (San Martín)</li>
+                <li>Área de Conservación Privada Abra Patricia-Alto Nieva (Amazonas)</li>
+                <li>Reserva Privada La Pampa del Burro (Amazonas)</li>
+                <li>Bosques de montaña en La Libertad</li>
+            </ul>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8158988.053612445!2d-78.5!3d-6.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91e8605342744385%3A0x3d3c6dc1394a7fc7!2sAmazon%20Rainforest!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            
+            <p>Prefiere bosques primarios con árboles altos donde encuentra alimento y protección. Su presencia está estrechamente ligada a la conservación de estos frágiles ecosistemas andinos.</p>
+        </section>
+
+        <section id="extincion" class="fade-in">
+            <h2><i class="fas fa-exclamation-triangle"></i> Amenazas y Conservación</h2>
+            
+            <div class="conservation-status">
+                <h3>Estado de Conservación: En Peligro Crítico (UICN)</h3>
+                <p>La población total se estima en menos de 250 individuos y su hábitat sigue disminuyendo.</p>
+            </div>
+            
+            <h3 style="margin-bottom: 1rem;">Principales amenazas:</h3>
+            
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h3><i class="fas fa-tree"></i> Deforestación</h3>
+                    <p>Tala ilegal y expansión agrícola destruyen su hábitat boscoso.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-gun"></i> Caza furtiva</h3>
+                    <p>Cazado por su carne y para mascotismo, a pesar de estar protegido.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-road"></i> Fragmentación</h3>
+                    <p>Carreteras y desarrollo dividen sus poblaciones.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-fire"></i> Incendios</h3>
+                    <p>Quemas para agricultura destruyen su hábitat.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-temperature-high"></i> Cambio climático</h3>
+                    <p>Altera los ecosistemas de bosque nuboso.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-baby"></i> Baja reproducción</h3>
+                    <p>Lenta tasa reproductiva (1 cría cada 2-3 años).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="video" class="fade-in">
+            <h2><i class="fas fa-video"></i> Documental sobre el Mono Choro</h2>
+            <p>Conoce más sobre este fascinante primate a través de este video:</p>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://youtube.com/embed/h74dPW-8mqU" title="Documental Mono Choro de Cola Amarilla" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section id="conservacion" class="fade-in">
+            <h2><i class="fas fa-hands-helping"></i> Esfuerzos de Conservación</h2>
+            <p>En Perú, varias organizaciones trabajan para proteger al Mono Choro de Cola Amarilla:</p>
+            
+            <ul>
+                <li><strong>Neotropical Primate Conservation:</strong> Investigación y protección de hábitats</li>
+                <li><strong>SERNANP:</strong> Protección en áreas naturales</li>
+                <li><strong>Asociación Peruana para la Conservación de la Naturaleza (APECO):</strong> Programas de conservación</li>
+                <li><strong>Comunidades locales:</strong> Ecoturismo y monitoreo</li>
+            </ul>
+            
+            <p>El Mono Choro está protegido por ley en Perú (Decreto Supremo N° 034-2004-AG) que lo declara especie en peligro crítico.</p>
+        </section>
+    </div>
+
+    <footer class="fade-in">
+        <p>© 2023 Conservación del Mono Choro de Cola Amarilla - Perú</p>
+        <p>Información científica actualizada a junio 2023</p>
+    </footer>
+
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Efecto de aparición al hacer scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const appearOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            appearOnScroll.observe(element);
+        });
+
+        // Botón de scroll arriba
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Efecto de hover en las tarjetas
+        const factCards = document.querySelectorAll('.fact-card');
+        
+        factCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('i');
+                icon.classList.add('fa-bounce');
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('i');
+                icon.classList.remove('fa-bounce');
+            });
+        });
+
+        // Efecto de parallax en el header
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const header = document.querySelector('header');
+            header.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+
+        // Animación de tipeo para el título
+        const title = document.querySelector('h1');
+        const titleText = title.textContent;
+        title.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < titleText.length) {
+                title.textContent += titleText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        };
+        
+        setTimeout(typeWriter, 500);
+
+        // Crear efecto de bananas flotantes
+        function createBanana() {
+            const banana = document.createElement('div');
+            banana.className = 'banana';
+            banana.innerHTML = '🍌';
+            
+            banana.style.left = `${Math.random() * 80 + 10}%`;
+            banana.style.top = `${Math.random() * 100 + 100}%`;
+            banana.style.animationDuration = `${Math.random() * 15 + 10}s`;
+            banana.style.animationDelay = `${Math.random() * 5}s`;
+            
+            document.body.appendChild(banana);
+            
+            // Eliminar después de la animación
+            setTimeout(() => {
+                banana.remove();
+            }, parseFloat(banana.style.animationDuration) * 1000);
+        }
+
+        // Crear bananas periódicamente
+        setInterval(createBanana, 3000);
+        
+        // Crear algunas bananas iniciales
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createBanana, i * 600);
+        }
+        
+function crearHormiga() {
+  const hormiga = document.createElement('div');
+  hormiga.classList.add('hormiga');
+
+  // Posición vertical aleatoria
+  const offsetY = Math.floor(Math.random() * 200);
+  hormiga.style.bottom = offsetY + 'px';
+
+  document.body.appendChild(hormiga);
+
+  // Esperar al final del movimiento para desvanecer
+  setTimeout(() => {
+    hormiga.style.opacity = '0'; // activa transición
+    setTimeout(() => {
+      hormiga.remove(); // eliminar tras la transición
+    }, 1000); // duración de la transición de opacidad
+  }, 10000); // duración del movimiento antes de desvanecer
+}
+
+// Repetir cada cierto tiempo
+setInterval(crearHormiga, 5000); // cada 5 segundos
+
+    </script>
+
+</body>
+</html>

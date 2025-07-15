@@ -30,12 +30,13 @@
       }
 
       header {
-        background: linear-gradient(135deg, var(--primary), var(--dark));
+        background: linear-gradient(135deg, var(--accent), var(--dark));
         color: white;
         padding: 3rem 1rem;
         text-align: center;
         position: relative;
         overflow: hidden;
+        width: 100%;
       }
 
       header::before {
@@ -88,7 +89,7 @@
       }
 
       .intro h2 {
-        font-size: 2.2rem;
+        font-size: 4rem;
         color: var(--dark);
         margin-bottom: 1.5rem;
         position: relative;
@@ -564,28 +565,6 @@
       .share-btn i {
         font-size: 1.2rem;
       }
-
-      /* Efecto de confeti */
-      .confetti {
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        background-color: var(--secondary);
-        opacity: 0;
-        animation: confetti 5s ease-in-out infinite;
-      }
-
-      @keyframes confetti {
-        0% {
-          transform: translateY(0) rotate(0deg);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(500px) rotate(720deg);
-          opacity: 0;
-        }
-      }
-
       /* Botón flotante */
       .floating-btn {
         position: fixed;
@@ -611,16 +590,189 @@
         transform: scale(1.1) rotate(90deg);
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
       }
+      @keyframes animatedTitle {
+  0% {
+    transform: scale(1) translateY(0);
+    text-shadow: 0 0 5px rgba(255,255,255,0.3);
+  }
+  50% {
+    transform: scale(1.05) translateY(-5px);
+    text-shadow: 0 0 20px rgba(255,255,255,0.6);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    text-shadow: 0 0 5px rgba(255,255,255,0.3);
+  }
+}
+
+@keyframes animatedSubtitle {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.masked-text {
+  font-size: 7rem; /* o ajusta según necesites */
+  font-weight: bold;
+  color: transparent;
+  background-image: url('https://static.vecteezy.com/system/resources/previews/010/971/327/non_2x/rainbow-colored-background-vector.jpg'); 
+  background-size: 200%;
+  background-position: 0 50%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animate-background 5s infinite alternate linear;
+}
+
+@keyframes animate-background {
+  0% {
+    background-position: 0 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+@keyframes bounceText {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.intro h2, .animal-section h2, .team-title {
+  animation: slideIn 0.8s ease forwards;
+}
+.student-card:hover {
+  transform: translateY(-15px) scale(1.05) rotate(2deg);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+.leaf-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.leaf {
+  position: absolute;
+  top: -100px;
+  right: 0;
+  width: var(--size);
+  height: auto;
+  animation: fall 10s linear infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes fall {
+  0% {
+    transform: translateX(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateX(-100px) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translateX(-200px) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translateX(-300px) rotate(270deg) scale(1.2);
+  }
+  100% {
+    transform: translate(-400px, 100vh) rotate(360deg) scale(1);
+  }
+}
+#toggleMusic {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  font-size: 18px;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1000;
+}
+.mensaje-estudiante {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+    background: #f7fdf7;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    max-width: 1000px;
+    margin: auto;
+    flex-wrap: wrap;
+}
+.mensaje-caja {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    padding: 1.5rem;
+    border-left: 5px solid #A2D45E;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
     </style>
   </head>
   <body>
+    <div class="leaf-container">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 1s;  --size: 70px; left: 10%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 2s;  --size: 50px; left: 25%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 3s;  --size: 60px; left: 40%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 4s;  --size: 55px; left: 55%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 5s;  --size: 45px; left: 70%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 6s;  --size: 65px; left: 85%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 7s;  --size: 50px; left: 5%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 8s;  --size: 40px; left: 20%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 9s;  --size: 70px; left: 35%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 10s; --size: 60px; left: 50%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 11s; --size: 45px; left: 65%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 12s; --size: 55px; left: 80%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 13s; --size: 50px; left: 90%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 14s; --size: 60px; left: 15%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 15s; --size: 70px; left: 30%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 16s; --size: 40px; left: 45%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 17s; --size: 65px; left: 60%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 18s; --size: 50px; left: 75%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 19s; --size: 55px; left: 95%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 20s; --size: 45px; left: 12%;">
+</div>
+
+
     <header>
-      <h1>Día del Logro 2025</h1>
-      <p class="subtitle">
-        Conoce a nuestro equipo y nuestro proyecto de conservación ecológica
-        mediante realidad aumentada
-      </p>
+      <h1 class="masked-text">Día del Logro 2025</h1>
+        <p class="subtitle" style="animation: bounceText 1.5s ease-in-out infinite;font-size: 32px;">
+            Conoce a nuestro equipo y nuestro proyecto de conservación ecológica
+            mediante realidad aumentada
+          </p>
     </header>
+
 
     <div class="container">
       <section class="intro fade-in">
@@ -639,39 +791,35 @@
       </section>
 
       <section class="animal-section fade-in">
-        <h2>Nuestros Espíritus del Reciclaje</h2>
+  <h2>Mensaje de la Estudiante</h2>
+  <p>
+    Este proyecto ha sido creado por Daniela Lucía Escobar Romucho con el propósito de generar conciencia sobre el reciclaje, la tecnología y la protección del medio ambiente.
+  </p>
+
+  <section class="mensaje-estudiante fade-in">
+    <div class="mensaje-caja">
+        <h3 style="color:#3A7C3A">Daniela Lucía Escobar Romucho</h3>
         <p>
-          Cada accesorio reciclado representa un animal y al escanear el código
-          QR, podrás conocer su historia y mensaje:
+            “Con este proyecto deseo inspirar a otros jóvenes a ver el reciclaje de una forma creativa, moderna y poderosa que puede transformarse en arte, en identidad y en conciencia. [...]”.
         </p>
+    </div>
 
-        <div class="animal-grid">
-          <div class="animal-card">
-            <img
-              class="animal-image float"
-              src="uploads/ESTUDIANTE.jpg"
-              alt="Zorrobot"
-            />
-            <h3 class="animal-name">Zorrobot</h3>
-            <p>
-              "Yo nací de lo que ustedes botaron. Estoy aquí para recordarte que
-              todo puede tener una segunda vida."
-            </p>
-          </div>
-        </div>
+</section>
 
-        <div class="share-buttons">
-          <button class="share-btn">
-            <i class="fab fa-facebook-f"></i> Compartir
-          </button>
-          <button class="share-btn">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-          </button>
-          <button class="share-btn">
-            <i class="fab fa-twitter"></i> Twitter
-          </button>
-        </div>
-      </section>
+  </div>
+
+  <div class="share-buttons">
+    <button class="share-btn">
+      <i class="fab fa-facebook-f"></i> Compartir
+    </button>
+    <button class="share-btn">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </button>
+    <button class="share-btn">
+      <i class="fab fa-twitter"></i> Twitter
+    </button>
+  </div>
+</section>
 
       <section class="team-section">
         <h2 class="team-title">Nuestro Equipo</h2>
@@ -685,7 +833,6 @@
               alt="Gato Andino"
             />
             <div class="student-info">
-              <h3 class="student-name">Carlos Mendoza</h3>
               <span class="student-animal">Gato Andino</span>
               <p>
                 Desarrollé un sistema de seguimiento de la población del gato
@@ -710,11 +857,10 @@
           <div class="student-card fade-in" style="animation-delay: 0.2s">
             <img
               class="student-avatar"
-              src="https://placehold.co/600x400/8bc34a/white?text=Pava+Aliblanca"
+              src="uploads/animal2.jpg"
               alt="Pava Aliblanca"
             />
             <div class="student-info">
-              <h3 class="student-name">Ana Torres</h3>
               <span class="student-animal">Pava Aliblanca</span>
               <p>
                 Creé un vivero de árboles nativos que ayudarán a restaurar el
@@ -739,11 +885,10 @@
           <div class="student-card fade-in" style="animation-delay: 0.3s">
             <img
               class="student-avatar"
-              src="https://placehold.co/600x400/ffc107/333?text=Mono+Choro"
+              src="uploads/animal3.jpg"
               alt="Mono Choro de Cola Amarilla"
             />
             <div class="student-info">
-              <h3 class="student-name">Luis Rojas</h3>
               <span class="student-animal">Mono Choro Cola Amarilla</span>
               <p>
                 Desarrollé una campaña educativa en escuelas rurales cerca de
@@ -768,11 +913,10 @@
           <div class="student-card fade-in" style="animation-delay: 0.4s">
             <img
               class="student-avatar"
-              src="https://placehold.co/600x400/2196F3/white?text=Rana+del+Titicaca"
+              src="uploads/animal4.jpg"
               alt="Rana del Titicaca"
             />
             <div class="student-info">
-              <h3 class="student-name">María Fernandez</h3>
               <span class="student-animal">Rana del Titicaca</span>
               <p>
                 Diseñé un sistema de filtrado de agua portátil para comunidades
@@ -796,11 +940,10 @@
           <div class="student-card fade-in" style="animation-delay: 0.5s">
             <img
               class="student-avatar"
-              src="https://placehold.co/600x400/607D8B/white?text=Cóndor+Andino"
+              src="uploads/animal5.jpg"
               alt="Cóndor Andino"
             />
             <div class="student-info">
-              <h3 class="student-name">Jorge Vargas</h3>
               <span class="student-animal">Cóndor Andino</span>
               <p>
                 Implementé un programa de monitoreo ciudadano para reportar
@@ -828,116 +971,143 @@
       <i class="fas fa-arrow-up"></i>
     </div>
 
+    <iframe id="bgMusic"
+    width="0" height="0"
+    src="https://www.youtube.com/embed/W8Xqnwhjapo?autoplay=1&loop=1&playlist=W8Xqnwhjapo&mute=0"
+    frameborder="0"
+    allow="autoplay"
+    allowfullscreen>
+  </iframe>
+<button id="toggleMusic">🔈 Música</button>
     <footer class="fade-in">
       <p>Proyecto del Día del Logro 2025 - "Espíritus del Reciclaje"</p>
       <p>Colegio [Nombre del Colegio] - Todos los derechos reservados</p>
     </footer>
-
+    <script src="js/general.js" crossorigin="anonymous"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Observador de intersección para animaciones
-        const observer = new IntersectionObserver(
-          entries => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("fade-in");
-              }
-            });
-          },
-          {
-            threshold: 0.1,
-          }
-        );
-
-        document
-          .querySelectorAll("section, .student-card, .animal-card")
-          .forEach(section => {
-            observer.observe(section);
-          });
-
-        // Botones de compartir
-        document.querySelectorAll(".share-btn").forEach(btn => {
-          btn.addEventListener("click", function () {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent("Mira este increíble proyecto ecológico con realidad aumentada!");
-            
-            if (this.querySelector(".fa-facebook-f")) {
-              window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
-            } else if (this.querySelector(".fa-whatsapp")) {
-              window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
-            } else if (this.querySelector(".fa-twitter")) {
-              window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
-            }
-          });
-        });
-
-        // Botón flotante para ir arriba
-        const topBtn = document.getElementById("topBtn");
-        topBtn.addEventListener("click", () => {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          });
-        });
-
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 300) {
-            topBtn.style.display = "flex";
-          } else {
-            topBtn.style.display = "none";
+  document.addEventListener("DOMContentLoaded", function () {
+    // Observador de intersección para animaciones
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in");
           }
         });
+      },
+      {
+        threshold: 0.1,
+      }
+    );
 
-        // Efecto de confeti al hacer hover en los títulos principales
-        const titles = document.querySelectorAll("h1, h2");
-        titles.forEach(title => {
-          title.addEventListener("mouseover", function() {
-            for (let i = 0; i < 20; i++) {
-              createConfetti(this);
-            }
-          });
-        });
-
-        function createConfetti(element) {
-          const confetti = document.createElement("div");
-          confetti.className = "confetti";
-          
-          // Posición aleatoria cerca del elemento
-          const rect = element.getBoundingClientRect();
-          const x = rect.left + Math.random() * rect.width;
-          const y = rect.top;
-          
-          // Estilos aleatorios
-          const size = Math.random() * 10 + 5;
-          const color = `hsl(${Math.random() * 60 + 30}, 100%, 50%)`;
-          const delay = Math.random() * 3;
-          const duration = Math.random() * 3 + 2;
-          
-          confetti.style.left = `${x}px`;
-          confetti.style.top = `${y}px`;
-          confetti.style.width = `${size}px`;
-          confetti.style.height = `${size}px`;
-          confetti.style.backgroundColor = color;
-          confetti.style.animationDelay = `${delay}s`;
-          confetti.style.animationDuration = `${duration}s`;
-          
-          document.body.appendChild(confetti);
-          
-          // Eliminar después de la animación
-          setTimeout(() => {
-            confetti.remove();
-          }, duration * 1000);
-        }
-
-        // Efecto de sonido al interactuar con QR (simulado)
-        const qrCodes = document.querySelectorAll(".qr-code");
-        qrCodes.forEach(qr => {
-          qr.addEventListener("mouseenter", () => {
-            // En un caso real, aquí podrías reproducir un sonido
-            console.log("Sonido de escaneo de QR");
-          });
-        });
+    document
+      .querySelectorAll("section, .student-card, .animal-card")
+      .forEach(section => {
+        observer.observe(section);
       });
-    </script>
+
+    // Botones de compartir
+    document.querySelectorAll(".share-btn").forEach(btn => {
+      btn.addEventListener("click", function () {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent("Mira este increíble proyecto ecológico con realidad aumentada!");
+        
+        if (this.querySelector(".fa-facebook-f")) {
+          window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+        } else if (this.querySelector(".fa-whatsapp")) {
+          window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+        } else if (this.querySelector(".fa-twitter")) {
+          window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        }
+      });
+    });
+
+    // Botón flotante para ir arriba
+    const topBtn = document.getElementById("topBtn");
+    topBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        topBtn.style.display = "flex";
+      } else {
+        topBtn.style.display = "none";
+      }
+    });
+
+    // Control de música
+    const musicIframe = document.getElementById("bgMusic");
+    const toggleBtn = document.getElementById("toggleMusic");
+    let isMuted = false;
+
+    toggleBtn.addEventListener("click", () => {
+      if (isMuted) {
+        // Desmutear - reemplazamos mute=1 con mute=0
+        musicIframe.src = musicIframe.src.replace("mute=1", "mute=0");
+        toggleBtn.textContent = "🔈 Música";
+      } else {
+        // Mutear - reemplazamos mute=0 con mute=1
+        musicIframe.src = musicIframe.src.replace("mute=0", "mute=1");
+        toggleBtn.textContent = "🔇 Silencio";
+      }
+      isMuted = !isMuted;
+    });
+
+    // Efecto de confeti al hacer hover en los títulos principales
+    const titles = document.querySelectorAll("h1, h2");
+    titles.forEach(title => {
+      title.addEventListener("mouseover", function() {
+        for (let i = 0; i < 20; i++) {
+          createConfetti(this);
+        }
+      });
+    });
+
+    function createConfetti(element) {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      
+      // Posición aleatoria cerca del elemento
+      const rect = element.getBoundingClientRect();
+      const x = rect.left + Math.random() * rect.width;
+      const y = rect.top;
+      
+      // Estilos aleatorios
+      const size = Math.random() * 10 + 5;
+      const color = `hsl(${Math.random() * 60 + 30}, 100%, 50%)`;
+      const delay = Math.random() * 3;
+      const duration = Math.random() * 3 + 2;
+      
+      confetti.style.left = `${x}px`;
+      confetti.style.top = `${y}px`;
+      confetti.style.width = `${size}px`;
+      confetti.style.height = `${size}px`;
+      confetti.style.backgroundColor = color;
+      confetti.style.animationDelay = `${delay}s`;
+      confetti.style.animationDuration = `${duration}s`;
+      
+      document.body.appendChild(confetti);
+      
+      // Eliminar después de la animación
+      setTimeout(() => {
+        confetti.remove();
+      }, duration * 1000);
+    }
+
+    // Efecto de sonido al interactuar con QR (simulado)
+    const qrCodes = document.querySelectorAll(".qr-code");
+    qrCodes.forEach(qr => {
+      qr.addEventListener("mouseenter", () => {
+        // En un caso real, aquí podrías reproducir un sonido
+        console.log("Sonido de escaneo de QR");
+      });
+    });
+  });
+</script>
+    
   </body>
 </html>

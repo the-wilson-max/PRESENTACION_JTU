@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Gato Andino - Joya Escondida de los Andes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8E6C88; /* Morado andino */
+            --secondary: #D4A59A; /* Tierra rojiza */
+            --accent: #6B8F71; /* Verde montaña */
+            --light: #F7F0F0; /* Fondo claro */
+            --dark: #3D2B3D; /* Texto oscuro */
+            --highlight: #C5D86D; /* Amarillo-verde */
+            --gradient-1: linear-gradient(135deg, #8E6C88 0%, #6B8F71 100%);
+            --gradient-2: linear-gradient(135deg, #D4A59A 0%, #8E6C88 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212, 165, 154, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(107, 143, 113, 0.1) 0%, transparent 20%);
+        }
+
+        header {
+            background: var(--gradient-1), 
+                        url('https://www.rainforesttrust.org/wp-content/uploads/2020/03/Andean-Cat-by-Jim-Sanderson-scaled.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 1rem 3rem;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid var(--primary);
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(142, 108, 136, 0.2);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-1);
+            border-radius: 3px;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .img-container {
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .img-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .img-container img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .img-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .img-caption {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .map-container {
+            height: 400px;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .conservation-status {
+            background-color: rgba(212, 165, 154, 0.1);
+            padding: 1.5rem;
+            border-left: 5px solid var(--accent);
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .conservation-status h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .fact-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-top: 3px solid var(--highlight);
+        }
+
+        .fact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(142, 108, 136, 0.15);
+        }
+
+        .fact-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .fact-card h3 i {
+            margin-right: 0.8rem;
+            color: var(--primary);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            background: var(--gradient-1);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        li::before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Animaciones adicionales */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Efecto de aparición al hacer scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Botón flotante */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            .facts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .leaf-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.leaf {
+  position: absolute;
+  top: -100px;
+  right: 0;
+  width: var(--size);
+  height: auto;
+  animation: fall 10s linear infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes fall {
+  0% {
+    transform: translateX(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateX(-100px) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translateX(-200px) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translateX(-300px) rotate(270deg) scale(1.2);
+  }
+  100% {
+    transform: translate(-400px, 100vh) rotate(360deg) scale(1);
+  }
+}
+    </style>
+</head>
+<body>
+
+    <div class="leaf-container">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 1s;  --size: 70px; left: 10%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 2s;  --size: 50px; left: 25%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 3s;  --size: 60px; left: 40%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 4s;  --size: 55px; left: 55%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 5s;  --size: 45px; left: 70%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 6s;  --size: 65px; left: 85%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 7s;  --size: 50px; left: 5%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 8s;  --size: 40px; left: 20%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 9s;  --size: 70px; left: 35%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 10s; --size: 60px; left: 50%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 11s; --size: 45px; left: 65%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 12s; --size: 55px; left: 80%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 13s; --size: 50px; left: 90%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 14s; --size: 60px; left: 15%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 15s; --size: 70px; left: 30%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 16s; --size: 40px; left: 45%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 17s; --size: 65px; left: 60%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 18s; --size: 50px; left: 75%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 19s; --size: 55px; left: 95%;">
+  <img src="uploads/hoja2.png" class="leaf" style="--delay: 20s; --size: 45px; left: 12%;">
+</div>
+    <header>
+        <h1 class="floating">El Gato Andino</h1>
+        <p class="subtitle">El felino más misterioso y amenazado de los Andes peruanos</p>
+    </header>
+
+    <div class="container">
+        <section id="introduccion" class="fade-in">
+            <h2><i class="fas fa-paw"></i> Introducción</h2>
+            <p>El gato andino (Leopardus jacobita) es uno de los felinos más raros y menos conocidos del mundo. Este escurridizo animal, considerado sagrado por las culturas andinas, habita las altas montañas de los Andes en Perú, Bolivia, Chile y Argentina.</p>
+            
+            <div class="img-container pulse">
+                <img src="https://i0.wp.com/www.actualidadambiental.pe/wp-content/uploads/2019/07/gato-andino-alianza-gato-andino.jpg?fit=900%2C628&ssl=1" alt="Gato Andino en su hábitat natural">
+                <p class="img-caption">Gato Andino en su hábitat natural - Foto: National Geographic</p>
+            </div>
+            
+            <p>Con una población estimada de menos de 1,400 individuos maduros, el gato andino está clasificado como "En Peligro" por la UICN y es considerado el felino más amenazado de América.</p>
+        </section>
+
+        <section id="descubrimiento" class="fade-in">
+            <h2><i class="fas fa-history"></i> Historia de su Descubrimiento</h2>
+            <p>El gato andino fue descrito científicamente por primera vez en 1865 por el naturalista Emilio Cornalia, basándose en una piel encontrada en Argentina. Sin embargo, permaneció como uno de los felinos menos estudiados durante más de un siglo.</p>
+            
+            <p>En Perú, los primeros registros confirmados provienen de la década de 1980, aunque las comunidades locales conocían de su existencia desde mucho antes, considerándolo un espíritu de las montañas.</p>
+            
+            <div class="img-container">
+                <img src="https://www.andeancat.org/wp-content/uploads/2020/05/andean-cat-distribution-map.jpg" alt="Distribución del Gato Andino">
+                <p class="img-caption">Área de distribución del Gato Andino en Sudamérica</p>
+            </div>
+            
+            <p>No fue hasta 1997 que se obtuvieron las primeras fotografías del animal en vida silvestre, gracias al trabajo del investigador Jim Sanderson en Chile. En Perú, el primer registro fotográfico confirmado data de 2004 en la región de Arequipa.</p>
+        </section>
+
+        <section id="habitat" class="fade-in">
+            <h2><i class="fas fa-mountain"></i> Hábitat en Perú</h2>
+            <p>En Perú, el gato andino se distribuye principalmente a lo largo de la cordillera de los Andes, entre los 3,000 y 5,000 metros sobre el nivel del mar. Sus territorios incluyen:</p>
+            
+            <ul>
+                <li>Sur de Perú: Arequipa, Moquegua, Tacna, Puno y Cusco</li>
+                <li>Centro de Perú: Áreas altoandinas de Junín, Huancavelica y Ayacucho</li>
+                <li>Norte de Perú: Ocasionalmente en Áncash y La Libertad</li>
+            </ul>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8168955.021888008!2d-76.538330925!3d-13.16306855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x916dd60cdaf83d81%3A0x3f3a3f3b3f3b3f3b!2sAndes!5e0!3m2!1ses!2spe!4v1620000000000!5m2!1ses!2spe" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            
+            <p>Prefiere hábitats de puna y páramo, con vegetación abierta de ichu (paja brava) y áreas rocosas donde puede esconderse y cazar. Su presencia está estrechamente ligada a la de su principal presa: la vizcacha (Lagidium viscacia).</p>
+        </section>
+
+        <section id="extincion" class="fade-in">
+            <h2><i class="fas fa-exclamation-triangle"></i> Causas de su Peligro de Extinción</h2>
+            
+            <div class="conservation-status">
+                <h3>Estado de Conservación: En Peligro (UICN)</h3>
+                <p>La población total de gatos andinos se estima en menos de 1,400 individuos maduros y continúa disminuyendo.</p>
+            </div>
+            
+            <h3 style="margin-bottom: 1rem;">Principales amenazas:</h3>
+            
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h3><i class="fas fa-home"></i> Pérdida de hábitat</h3>
+                    <p>La expansión de la minería, agricultura y urbanización fragmenta y destruye su frágil ecosistema andino.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-crosshairs"></i> Caza furtiva</h3>
+                    <p>Aunque protegido, es cazado por su piel o por creencias tradicionales que lo asocian con la mala suerte.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-utensils"></i> Disminución de presas</h3>
+                    <p>La caza excesiva de vizcachas (su principal alimento) reduce sus fuentes de sustento.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-road"></i> Infraestructura</h3>
+                    <p>Carreteras y líneas eléctricas fragmentan su territorio y aumentan el riesgo de atropellos.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-thermometer-half"></i> Cambio climático</h3>
+                    <p>El calentamiento global altera su hábitat de alta montaña, forzándolo a mayores altitudes.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-dog"></i> Competencia con especies invasoras</h3>
+                    <p>Perros asilvestrados compiten por alimento y transmiten enfermedades.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="video" class="fade-in">
+            <h2><i class="fas fa-video"></i> Documental sobre el Gato Andino</h2>
+            <p>Conoce más sobre este fascinante felino a través de este video:</p>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/cQwcTG_CyFU" title="Documental Gato Andino" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section id="conservacion" class="fade-in">
+            <h2><i class="fas fa-hands-helping"></i> Esfuerzos de Conservación</h2>
+            <p>En Perú, varias organizaciones trabajan para proteger al gato andino:</p>
+            
+            <ul>
+                <li><strong>Alianza Gato Andino (AGA):</strong> Realiza investigaciones y educación ambiental</li>
+                <li><strong>SERNANP:</strong> Protege su hábitat en áreas naturales protegidas</li>
+                <li><strong>Universidades peruanas:</strong> Estudian su ecología y distribución</li>
+                <li><strong>Comunidades locales:</strong> Participan en monitoreo y protección</li>
+            </ul>
+            
+            <p>El gato andino está protegido por ley en Perú (Decreto Supremo N° 004-2014-MINAGRI) que lo incluye en la lista de especies en peligro de extinción.</p>
+        </section>
+    </div>
+
+    <footer class="fade-in">
+        <p>© 2023 Conservación del Gato Andino - Perú</p>
+        <p>Información científica actualizada a junio 2023</p>
+    </footer>
+
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Efecto de aparición al hacer scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const appearOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            appearOnScroll.observe(element);
+        });
+
+        // Botón de scroll arriba
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Efecto de hover en las tarjetas
+        const factCards = document.querySelectorAll('.fact-card');
+        
+        factCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('i');
+                icon.classList.add('fa-bounce');
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('i');
+                icon.classList.remove('fa-bounce');
+            });
+        });
+
+        // Efecto de parallax en el header
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const header = document.querySelector('header');
+            header.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+
+        // Animación de tipeo para el título
+        const title = document.querySelector('h1');
+        const titleText = title.textContent;
+        title.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < titleText.length) {
+                title.textContent += titleText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        };
+        
+        setTimeout(typeWriter, 500);
+    </script>
+
+</body>
+</html>

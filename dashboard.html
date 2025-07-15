@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asociación del Mercado Santo Domingo</title>
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="icon" type="image/x-icon" href="uploads/logo.jpg" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Botón menú móvil -->
+    <button
+      class="sidebar-toggle-btn"
+      aria-label="Abrir menú"
+      id="sidebarToggle"
+    >
+      <span class="material-icons">menu</span>
+    </button>
+    <aside class="sidebar" id="sidebar" aria-label="Menú principal">
+      <div class="sidebar-header">
+        <img
+          src="uploads/logo.jpg"
+          class="icon"
+          alt="Logo"
+          onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='block';"
+        />
+        <h2 id="logo-fallback" style="display: none" class="sidebar-title">
+          Mercado SD
+        </h2>
+        <h2 class="sidebar-title">Asociación del Mercado Santo Domingo</h2>
+      </div>
+      <nav
+        class="sidebar-menu"
+        id="generalMenu"
+        aria-label="Navegación lateral"
+      >
+        <div class="menu-item active" data-target="general-container" tabindex="0" role="menuitem">
+  <span class="material-icons">dashboard</span>
+  <span class="menu-text">Principal</span>
+        </div>
+        <div class="menu-item" data-target="noticias-container" tabindex="0" role="menuitem">
+  <span class="material-icons">pets</span>
+  <span class="menu-text">Gato andino</span>
+</div>
+        <div class="menu-item" data-target="integrantes-container" tabindex="0" role="menuitem">
+          <span class="material-icons">pets</span>
+          <span class="menu-text">pava aliblanca</span>
+        </div>
+        <div class="menu-item" data-target="encuestas-container" tabindex="0" role="menuitem">
+          <span class="material-icons">pets</span>
+          <span class="menu-text">Mono choro</span>
+        </div>
+        <div class="menu-item" data-target="calendar-container" tabindex="0" role="menuitem">
+          <span class="material-icons">pets</span>
+          <span class="menu-text">Rana Titicaca</span>
+        </div>
+        <div class="menu-item" tabindex="0" role="menuitem">
+          <span class="material-icons">person</span>
+          <span class="menu-text">Perfil</span>
+        </div>
+        <div class="menu-item" tabindex="0" role="menuitem">
+          <span class="material-icons">message</span>
+          <span class="menu-text">Mensajes</span>
+        </div>
+      </nav>
+      <button id="logoutBtn" class="btn-logout" aria-label="Cerrar sesión">
+        <span class="material-icons" aria-hidden="true">logout</span>
+        <span>Cerrar sesión</span>
+      </button>
+    </aside>
+    <main class="main-content">
+      <div
+        id="calendar-container"
+        class="calendar-container"
+        style="display: none"
+      >
+        <iframe src="rana-titicaca.html"></iframe>
+      </div>
+      <div
+        id="general-container"
+        class="general-container"
+        style="display: none"
+      >
+        <iframe src="general.html"></iframe>
+      </div>
+      <div id="integrantes-container" style="display: none">
+        <iframe src="pava-aliblanca.html"></iframe>
+      </div>
+      <div id="encuestas-container" style="display: none">
+        <iframe src="mono-choro.html"></iframe>
+      </div>
+      <div id="noticias-container" style="display: none">
+        <iframe src="gato-andino.html"></iframe>
+      </div>
+      <div id="perfil-container" style="display: none">
+        <iframe src="perfil.html"></iframe>
+      </div>
+      <!-- NUEVO: Contenedor del chat global -->
+      <div id="mensajes-container" style="display: none">
+        <iframe src="chat-global.html"></iframe>
+      </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuItems = document.querySelectorAll(".menu-item");
+    const containers = document.querySelectorAll("main > div");
+
+    function hideAllContainers() {
+      containers.forEach((c) => (c.style.display = "none"));
+    }
+
+    // Mostrar General al inicio
+    document.getElementById("general-container").style.display = "block";
+
+    menuItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        menuItems.forEach((i) => i.classList.remove("active"));
+        item.classList.add("active");
+
+        const targetId = item.getAttribute("data-target");
+        hideAllContainers();
+        const target = document.getElementById(targetId);
+        if (target) target.style.display = "block";
+      });
+    });
+
+    // LOGOUT
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+      localStorage.removeItem("usuarioId");
+      sessionStorage.removeItem("usuarioId");
+      window.location.href = "index.html";
+    });
+
+    // Sidebar toggle para móvil
+    const sidebar = document.getElementById("sidebar");
+    const toggleBtn = document.getElementById("sidebarToggle");
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (window.innerWidth <= 800 && sidebar.classList.contains("open")) {
+        if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+          sidebar.classList.remove("open");
+        }
+      }
+    });
+  });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rana del Titicaca - El anfibio en peligro del lago sagrado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3A7CA5;   /* Azul lago */
+            --secondary: #5CB8B2; /* Verde agua */
+            --accent: #F7B32B;    /* Amarillo sol */
+            --light: #E8F1F2;     /* Fondo claro */
+            --dark: #2F4858;      /* Texto oscuro */
+            --highlight: #A5D8FF; /* Azul claro */
+            --gradient-1: linear-gradient(135deg, #3A7CA5 0%, #5CB8B2 100%);
+            --gradient-2: linear-gradient(135deg, #F7B32B 0%, #3A7CA5 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Nueva animación de agua */
+        .water-effect {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%233A7CA5" fill-opacity="0.3" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-repeat: repeat-x;
+            z-index: -1;
+            animation: wave 15s linear infinite;
+        }
+
+        .water-effect:nth-child(2) {
+            bottom: 20px;
+            opacity: 0.5;
+            animation: wave-reverse 20s linear infinite;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%235CB8B2" fill-opacity="0.2" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+        }
+
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1440px; }
+        }
+
+        @keyframes wave-reverse {
+            0% { background-position-x: 1440px; }
+            100% { background-position-x: 0; }
+        }
+
+        header {
+            background: var(--gradient-1), 
+                        url('https://www.biodiversidad.gob.mx/media/1/fauna/images/ranaTiticaca.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 1rem 3rem;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+            margin-bottom: 2rem;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease;
+            background: linear-gradient(135deg, #FFFFFF, #F7B32B);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.3s both;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 5px solid var(--primary);
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(58, 124, 165, 0.2);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-1);
+            border-radius: 3px;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .img-container {
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .img-container::before {
+            content: '🐸 Rana del Titicaca';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .img-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .img-container img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .img-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .img-caption {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: var(--primary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .map-container {
+            height: 400px;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid var(--accent);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .conservation-status {
+            background-color: rgba(92, 184, 178, 0.1);
+            padding: 1.5rem;
+            border-left: 5px solid var(--primary);
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .conservation-status h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .fact-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--highlight);
+        }
+
+        .fact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(58, 124, 165, 0.15);
+        }
+
+        .fact-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .fact-card h3 i {
+            margin-right: 0.8rem;
+            color: var(--primary);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid var(--secondary);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            background: var(--gradient-1);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            clip-path: polygon(0 15%, 50% 0, 100% 15%, 100% 100%, 0 100%);
+            position: relative;
+            z-index: 1;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        li::before {
+            content: '🐸';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        /* Animaciones adicionales */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .bubble {
+            animation: bubble 2s ease-in-out infinite;
+        }
+
+        @keyframes bubble {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Efecto de aparición al hacer scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Botón flotante */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Efecto de burbujas */
+        .bubble-effect {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(165, 216, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            animation: floatBubble 5s linear infinite;
+        }
+
+        @keyframes floatBubble {
+            0% { 
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+                left: 10%;
+            }
+            50% { 
+                opacity: 0.7;
+                transform: translateY(50vh) scale(1);
+            }
+            100% { 
+                transform: translateY(-100px) scale(0.3);
+                opacity: 0;
+                left: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            .facts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .water-effect {
+                height: 60px;
+            }
+        }
+        .leaf-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.leaf {
+  position: absolute;
+  top: -100px;
+  right: 0;
+  width: var(--size);
+  height: auto;
+  animation: fall 10s linear infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes fall {
+  0% {
+    transform: translateX(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateX(-100px) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translateX(-200px) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translateX(-300px) rotate(270deg) scale(1.2);
+  }
+  100% {
+    transform: translate(-400px, 100vh) rotate(360deg) scale(1);
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="leaf-container">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 1s;  --size: 70px; left: 10%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 2s;  --size: 50px; left: 25%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 3s;  --size: 60px; left: 40%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 4s;  --size: 55px; left: 55%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 5s;  --size: 45px; left: 70%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 6s;  --size: 65px; left: 85%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 7s;  --size: 50px; left: 5%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 8s;  --size: 40px; left: 20%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 9s;  --size: 70px; left: 35%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 10s; --size: 60px; left: 50%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 11s; --size: 45px; left: 65%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 12s; --size: 55px; left: 80%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 13s; --size: 50px; left: 90%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 14s; --size: 60px; left: 15%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 15s; --size: 70px; left: 30%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 16s; --size: 40px; left: 45%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 17s; --size: 65px; left: 60%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 18s; --size: 50px; left: 75%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 19s; --size: 55px; left: 95%;">
+  <img src="uploads/gota.png" class="leaf" style="--delay: 20s; --size: 45px; left: 12%;">
+</div>
+
+    <!-- Efecto de agua animado -->
+    <div class="water-effect"></div>
+    <div class="water-effect"></div>
+
+    <header>
+        <h1 class="floating">Rana del Titicaca</h1>
+        <p class="subtitle">El anfibio endémico del lago sagrado en peligro crítico</p>
+    </header>
+
+    <div class="container">
+        <section id="introduccion" class="fade-in">
+            <h2><i class="fas fa-frog"></i> Introducción</h2>
+            <p>La Rana del Titicaca (Telmatobius culeus) es un anfibio endémico del lago Titicaca y una de las especies más amenazadas de Perú. Conocida por su piel arrugada y su capacidad para respirar a través de ella, esta rana es un símbolo de la biodiversidad única del lago más alto del mundo.</p>
+            
+            <div class="img-container bubble">
+                <img src="https://e.rpp-noticias.io/xlarge/2019/09/07/010701_837616.jpg" alt="Rana del Titicaca en su hábitat natural">
+            </div>
+            
+            <p>Con una población en declive acelerado, está clasificada como "En Peligro Crítico" por la UICN y ha perdido más del 80% de su población en los últimos 15 años.</p>
+        </section>
+
+        <section id="descubrimiento" class="fade-in">
+            <h2><i class="fas fa-history"></i> Características Únicas</h2>
+            <p>La Rana del Titicaca es famosa por sus adaptaciones extremas a la vida en altitud:</p>
+            
+            <ul>
+                <li>Piel arrugada que aumenta su superficie respiratoria</li>
+                <li>Capacidad de respirar a través de la piel (respiración cutánea)</li>
+                <li>Tamaño grande (hasta 14 cm de largo)</li>
+                <li>Coloración variable entre verde oliva y negro</li>
+            </ul>
+            
+            <div class="img-container">
+                <img src="https://biodiversidadanp.sernanp.gob.pe/wp-content/uploads/2024/01/RN05_Telmatobius-culeus-@Evelasquez-1024x768.jpg" alt="Primer plano de la Rana del Titicaca">
+                <p class="img-caption">Detalle de la piel arrugada de la Rana del Titicaca</p>
+            </div>
+            
+            <p>Estas adaptaciones le permiten vivir a 3,800 metros de altitud, donde el oxígeno es escaso.</p>
+        </section>
+
+        <section id="habitat" class="fade-in">
+            <h2><i class="fas fa-water"></i> Hábitat y Distribución</h2>
+            <p>La Rana del Titicaca habita exclusivamente en el lago Titicaca y sus afluentes:</p>
+            
+            <ul>
+                <li>Lago Titicaca (Perú y Bolivia)</li>
+                <li>Ríos y lagunas cercanas al lago</li>
+                <li>Zonas con profundidades de 2 a 10 metros</li>
+                <li>Áreas con vegetación acuática</li>
+            </ul>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.963041820745!2d-69.3356686857141!3d-16.46699998862876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915edf8979bba295%3A0x1c1a0b6f4b9f1b0a!2sLago%20Titicaca!5e0!3m2!1ses!2spe!4v1620000000000!5m2!1ses!2spe" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            
+            <p>Prefiere zonas con fondos rocosos o arenosos donde puede esconderse y encontrar alimento.</p>
+        </section>
+
+        <section id="extincion" class="fade-in">
+            <h2><i class="fas fa-exclamation-triangle"></i> Amenazas y Conservación</h2>
+            
+            <div class="conservation-status">
+                <h3>Estado de Conservación: En Peligro Crítico (UICN)</h3>
+                <p>Se estima que su población ha disminuido en más del 80% en 15 años.</p>
+            </div>
+            
+            <h3 style="margin-bottom: 1rem;">Principales amenazas:</h3>
+            
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h3><i class="fas fa-trash"></i> Contaminación</h3>
+                    <p>Vertimiento de aguas residuales y minería afectan su hábitat.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-fish"></i> Sobrepesca</h3>
+                    <p>Captura incidental en redes de pesca.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-mortar-pestle"></i> Caza ilegal</h3>
+                    <p>Usada en medicina tradicional y como ingrediente en jugos.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-temperature-high"></i> Cambio climático</h3>
+                    <p>Aumento de temperatura y disminución del nivel del lago.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-frog"></i> Especies invasoras</h3>
+                    <p>Truchas que compiten por alimento y depredan huevos.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3><i class="fas fa-disease"></i> Enfermedades</h3>
+                    <p>Hongo quítrido que afecta a anfibios.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="video" class="fade-in">
+            <h2><i class="fas fa-video"></i> Documental sobre la Rana del Titicaca</h2>
+            <p>Conoce más sobre este fascinante anfibio a través de este video:</p>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://youtube.com/embed/8GrOM6zkdV8" title="Documental Rana del Titicaca" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section id="conservacion" class="fade-in">
+            <h2><i class="fas fa-hands-helping"></i> Esfuerzos de Conservación</h2>
+            <p>Iniciativas para proteger a la Rana del Titicaca:</p>
+            
+            <ul>
+                <li><strong>Proyecto Ranas del Titicaca:</strong> Investigación y reproducción en cautiverio</li>
+                <li><strong>SERNANP:</strong> Protección de su hábitat en la Reserva Nacional del Titicaca</li>
+                <li><strong>Universidad Peruana Cayetano Heredia:</strong> Estudios sobre su biología</li>
+                <li><strong>Comunidades locales:</strong> Programas de educación ambiental</li>
+            </ul>
+            
+            <p>La especie está protegida por ley en Perú (Decreto Supremo N° 004-2014-MINAGRI) que prohíbe su captura y comercialización.</p>
+        </section>
+    </div>
+
+    <footer class="fade-in">
+        <p>© 2023 Conservación de la Rana del Titicaca - Perú</p>
+        <p>Información científica actualizada a junio 2023</p>
+    </footer>
+
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Efecto de aparición al hacer scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const appearOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            appearOnScroll.observe(element);
+        });
+
+        // Botón de scroll arriba
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Efecto de hover en las tarjetas
+        const factCards = document.querySelectorAll('.fact-card');
+        
+        factCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('i');
+                icon.classList.add('fa-bounce');
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('i');
+                icon.classList.remove('fa-bounce');
+            });
+        });
+
+        // Efecto de parallax en el header
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const header = document.querySelector('header');
+            header.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+
+        // Animación de tipeo para el título
+        const title = document.querySelector('h1');
+        const titleText = title.textContent;
+        title.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < titleText.length) {
+                title.textContent += titleText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        };
+        
+        setTimeout(typeWriter, 500);
+
+        // Crear efecto de burbujas flotantes
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble-effect';
+            
+            const size = Math.random() * 30 + 10;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            bubble.style.left = `${Math.random() * 80 + 10}%`;
+            bubble.style.top = `${Math.random() * 100 + 100}%`;
+            bubble.style.animationDuration = `${Math.random() * 10 + 5}s`;
+            bubble.style.animationDelay = `${Math.random() * 5}s`;
+            
+            document.body.appendChild(bubble);
+            
+            // Eliminar después de la animación
+            setTimeout(() => {
+                bubble.remove();
+            }, parseFloat(bubble.style.animationDuration) * 1000);
+        }
+
+        // Crear burbujas periódicamente
+        setInterval(createBubble, 2000);
+        
+        // Crear algunas burbujas iniciales
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createBubble, i * 300);
+        }
+    </script>
+
+</body>
+</html>
