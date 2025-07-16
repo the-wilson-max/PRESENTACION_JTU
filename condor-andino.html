@@ -1,0 +1,936 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cóndor Andino - El guardián de los Andes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+        :root {
+            --primary: #2C3E50;     /* Azul montaña */
+            --secondary: #34495E;   /* Gris pizarra */
+            --accent: #E74C3C;      /* Rojo condor */
+            --gold: #F39C12;        /* Dorado */
+            --light: #ECF0F1;       /* Fondo claro */
+            --dark: #1B2631;        /* Texto oscuro */
+            --sky: #87CEEB;         /* Azul cielo */
+            --mountain: #8B4513;    /* Marrón montaña */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #87CEEB 0%, #4682B4 50%, #2C3E50 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animación de nubes flotantes */
+        .clouds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            animation: float-cloud 20s linear infinite;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+        }
+
+        .cloud1 {
+            width: 80px;
+            height: 40px;
+            top: 20%;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .cloud1::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+
+        .cloud1::after {
+            width: 60px;
+            height: 40px;
+            top: -15px;
+            right: 10px;
+        }
+
+        .cloud2 {
+            width: 100px;
+            height: 50px;
+            top: 10%;
+            left: -120px;
+            animation-delay: 10s;
+        }
+
+        .cloud2::before {
+            width: 60px;
+            height: 60px;
+            top: -30px;
+            left: 15px;
+        }
+
+        .cloud2::after {
+            width: 70px;
+            height: 50px;
+            top: -20px;
+            right: 15px;
+        }
+
+        .cloud3 {
+            width: 120px;
+            height: 60px;
+            top: 30%;
+            left: -140px;
+            animation-delay: 5s;
+        }
+
+        .cloud3::before {
+            width: 70px;
+            height: 70px;
+            top: -35px;
+            left: 20px;
+        }
+
+        .cloud3::after {
+            width: 80px;
+            height: 60px;
+            top: -25px;
+            right: 20px;
+        }
+
+        @keyframes float-cloud {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw + 200px)); }
+        }
+
+        /* Animación de montañas */
+        .mountains {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(to top, #8B4513, #A0522D);
+            clip-path: polygon(0 100%, 0 60%, 15% 40%, 25% 45%, 35% 20%, 50% 30%, 65% 10%, 80% 25%, 90% 15%, 100% 35%, 100% 100%);
+            z-index: 0;
+            animation: mountain-breathe 8s ease-in-out infinite;
+        }
+
+        @keyframes mountain-breathe {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.02); opacity: 1; }
+        }
+
+        /* Cóndor volando */
+        .condor-flying {
+            position: fixed;
+            width: 80px;
+            height: 60px;
+            z-index: 5;
+            animation: fly-across 15s linear infinite;
+        }
+
+        .condor-flying::before {
+            content: '🦅';
+            font-size: 60px;
+            display: block;
+            animation: wing-flap 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes fly-across {
+            0% { 
+                left: -100px; 
+                top: 20%; 
+                transform: rotate(0deg);
+            }
+            25% { 
+                left: 25%; 
+                top: 15%; 
+                transform: rotate(-5deg);
+            }
+            50% { 
+                left: 50%; 
+                top: 25%; 
+                transform: rotate(5deg);
+            }
+            75% { 
+                left: 75%; 
+                top: 10%; 
+                transform: rotate(-3deg);
+            }
+            100% { 
+                left: calc(100% + 100px); 
+                top: 20%; 
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes wing-flap {
+            0% { transform: scaleX(1); }
+            100% { transform: scaleX(0.8); }
+        }
+
+        /* Partículas flotantes */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            animation: float-particle 8s linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header animado */
+        header {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.9), rgba(52, 73, 94, 0.9));
+            color: white;
+            padding: 6rem 1rem 4rem;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+            margin-bottom: 3rem;
+            z-index: 3;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate-light 10s linear infinite;
+        }
+
+        @keyframes rotate-light {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: title-pulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes title-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: subtitle-glow 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes subtitle-glow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+            50% { text-shadow: 2px 2px 20px rgba(255,255,255,0.8); }
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Secciones animadas */
+        section {
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+            animation: section-float 6s ease-in-out infinite;
+        }
+
+        @keyframes section-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        section:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(231, 76, 60, 0.3);
+            border-color: var(--accent);
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(231, 76, 60, 0.1), transparent);
+            animation: rotate-border 4s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate-border {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+            animation: heading-bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes heading-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        h2 i {
+            margin-right: 15px;
+            color: var(--accent);
+            animation: icon-spin 3s ease-in-out infinite;
+        }
+
+        @keyframes icon-spin {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        /* Imágenes con efectos */
+        .img-container {
+            margin: 2rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .img-container:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 25px 50px rgba(231, 76, 60, 0.4);
+        }
+
+        .img-container img {
+            width: 100%;
+            display: block;
+            transition: all 0.8s ease;
+        }
+
+        .img-container:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.2) saturate(1.3);
+        }
+
+        /* Tarjetas de datos animadas */
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .fact-card {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid var(--accent);
+            animation: card-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes card-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .fact-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(231, 76, 60, 0.3);
+        }
+
+        .fact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            animation: progress-bar 3s ease-in-out infinite;
+        }
+
+        @keyframes progress-bar {
+            0% { transform: scaleX(0); }
+            50% { transform: scaleX(1); }
+            100% { transform: scaleX(0); }
+        }
+
+        .fact-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            animation: text-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes text-glow {
+            0%, 100% { text-shadow: none; }
+            50% { text-shadow: 0 0 10px rgba(231, 76, 60, 0.5); }
+        }
+
+        .fact-card h3 i {
+            margin-right: 1rem;
+            color: var(--accent);
+            animation: icon-bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes icon-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Botón flotante animado */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+            animation: float-button 3s ease-in-out infinite;
+        }
+
+        @keyframes float-button {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: scale(1.2) rotate(360deg);
+            box-shadow: 0 15px 35px rgba(231, 76, 60, 0.5);
+        }
+
+        /* Efectos de escritura */
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid var(--accent);
+            white-space: nowrap;
+            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--accent); }
+        }
+
+        /* Estadísticas animadas */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            color: white;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            animation: stat-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes stat-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(231, 76, 60, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(231, 76, 60, 0.8); }
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            display: block;
+            animation: number-count 2s ease-out;
+        }
+
+        @keyframes number-count {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            animation: label-fade 2s ease-in 0.5s both;
+        }
+
+        @keyframes label-fade {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer animado */
+        footer {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
+            clip-path: polygon(0 20%, 50% 0, 100% 20%, 100% 100%, 0 100%);
+            position: relative;
+            z-index: 3;
+            animation: footer-wave 5s ease-in-out infinite;
+        }
+
+        @keyframes footer-wave {
+            0%, 100% { transform: skewY(0deg); }
+            50% { transform: skewY(1deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.1rem; }
+            section { padding: 1.5rem; }
+            .facts-grid { grid-template-columns: 1fr; }
+            .stats-container { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* Efecto de fade in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animación de líneas de vuelo */
+        .flight-path {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .flight-line {
+            position: absolute;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(231, 76, 60, 0.5), transparent);
+            animation: flight-trail 8s linear infinite;
+        }
+
+        @keyframes flight-trail {
+            0% { transform: translateX(-100px) translateY(-100px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(calc(100vw + 100px)) translateY(100px); opacity: 0; }
+        }
+        .condor-volador {
+  position: fixed;
+  top: 100px; /* altura inicial del vuelo */
+  left: -200px; /* fuera del lado izquierdo */
+  width: 150px;
+  animation: volarCondor 20s linear infinite;
+  z-index: 999;
+}
+
+.condor-volador img {
+  width: 100%;
+  transform: rotate(90deg);
+}
+
+@keyframes volarCondor {
+  0% {
+    left: -200px;
+    top: 100px;
+    transform: scaleX(1);
+  }
+  50% {
+    top: 80px;
+    transform: scaleX(1);
+  }
+  51% {
+  }
+  100% {
+    left: 100%;
+    top: 120px;
+    transform: scaleX(-1);
+  }
+}
+.leaf-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.leaf {
+  position: absolute;
+  top: -100px;
+  right: 0;
+  width: var(--size);
+  height: auto;
+  animation: fall 10s linear infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes fall {
+  0% {
+    transform: translateX(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateX(-100px) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translateX(-200px) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translateX(-300px) rotate(270deg) scale(1.2);
+  }
+  100% {
+    transform: translate(-400px, 100vh) rotate(360deg) scale(1);
+  }
+}
+    </style>
+    <header>
+
+<div class="condor-volador">
+  <img src="minigames/condor.png" alt="Cóndor volando">
+</div>
+
+    <h1 class="floating">Cóndor Andino</h1>
+    <p class="subtitle">El majestuoso guardián de los cielos sudamericanos</p>
+  </header>
+
+  <div class="leaf-container">
+  <img src="uploads/pluma-Photoroom.png" class="leaf" style="--delay: 1s;  --size: 70px; left: 10%;">
+  <img src="uploads/pluma-Photoroom.png" class="leaf" style="--delay: 2s;  --size: 50px; left: 25%;">
+  <img src="uploads/pluma-Photoroom.png" class="leaf" style="--delay: 3s;  --size: 60px; left: 40%;">
+  <img src="uploads/pluma-Photoroom.png" class="leaf" style="--delay: 4s;  --size: 55px; left: 55%;">
+  <img src="uploads/pluma-Photoroom.png" class="leaf" style="--delay: 5s;  --size: 45px; left: 70%;">
+  <img src="uploads/pluma-Photoroom.png" class="leaf" style="--delay: 6s;  --size: 65px; left: 85%;">
+  <img src="uploads/pluma-Photoroom.png" class="leaf" style="--delay: 7s;  --size: 50px; left: 5%;">
+  <img src="uploads/pluma-Photoroom.png" class="leaf" style="--delay: 8s;  --size: 40px; left: 20%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 9s;  --size: 70px; left: 35%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 10s; --size: 60px; left: 50%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 11s; --size: 45px; left: 65%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 12s; --size: 55px; left: 80%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 13s; --size: 50px; left: 90%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 14s; --size: 60px; left: 15%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 15s; --size: 70px; left: 30%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 16s; --size: 40px; left: 45%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 17s; --size: 65px; left: 60%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 18s; --size: 50px; left: 75%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 19s; --size: 55px; left: 95%;">
+  <img src="uploads/hoja.png" class="leaf" style="--delay: 20s; --size: 45px; left: 12%;">
+</div>
+  <div class="container">
+    <section id="introduccion" class="fade-in">
+      <h2><i class="fas fa-dove"></i> Introducción</h2>
+      <p>El Cóndor Andino (<em>Vultur gryphus</em>) es una de las aves voladoras más grandes del mundo y un símbolo emblemático de los Andes. Con su enorme envergadura y vuelo majestuoso, representa la libertad y la grandeza de la cordillera sudamericana.</p>
+      <div class="img-container bubble">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Andean_condor_in_flight.jpg" alt="Cóndor Andino en vuelo">
+      </div>
+      <p>Es considerado en peligro de extinción en varios países debido a la caza, el envenenamiento y la pérdida de hábitat.</p>
+    </section>
+
+    <section id="caracteristicas" class="fade-in">
+      <h2><i class="fas fa-feather-alt"></i> Características Únicas</h2>
+      <p>El Cóndor Andino es conocido por su gran tamaño y sus adaptaciones al vuelo en altura:</p>
+      <ul>
+        <li>Envergadura de hasta 3,3 metros</li>
+        <li>Peso entre 8 y 15 kg</li>
+        <li>Plumaje negro con plumas blancas en el cuello y alas</li>
+        <li>Los machos poseen una cresta prominente</li>
+      </ul>
+      <div class="img-container">
+        <img src="https://cdn.download.ams.birds.cornell.edu/api/v1/asset/308020001/1800" alt="Cóndor Andino en una roca">
+        <p class="img-caption">El cóndor usa las corrientes térmicas para planear largas distancias</p>
+      </div>
+      <p>Puede vivir más de 70 años en cautiverio y recorrer cientos de kilómetros sin batir las alas.</p>
+    </section>
+
+    <section id="habitat" class="fade-in">
+      <h2><i class="fas fa-mountain"></i> Hábitat y Distribución</h2>
+      <p>Habita a lo largo de la cordillera de los Andes y en zonas abiertas de Sudamérica:</p>
+      <ul>
+        <li>Cordillera de los Andes (desde Venezuela hasta Tierra del Fuego)</li>
+        <li>Altiplanos, cañones y áreas abiertas para facilitar el vuelo</li>
+        <li>Nidos en salientes rocosas de difícil acceso</li>
+      </ul>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25451.8048205659!2d-70.25483513649143!3d-15.840516226682267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915ca9c540d11423%3A0x345f79b15b3c190b!2sCordillera%20de%20los%20Andes!5e0!3m2!1ses!2spe!4v1620000000000!5m2!1ses!2spe" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <section id="amenazas" class="fade-in">
+      <h2><i class="fas fa-skull-crossbones"></i> Amenazas y Conservación</h2>
+      <div class="conservation-status">
+        <h3>Estado de Conservación: Vulnerable (UICN)</h3>
+        <p>Sus poblaciones están disminuyendo rápidamente en varios países sudamericanos.</p>
+      </div>
+      <h3>Principales amenazas:</h3>
+      <div class="facts-grid">
+        <div class="fact-card">
+          <h3><i class="fas fa-bone"></i> Envenenamiento</h3>
+          <p>Envenenados al consumir carroña contaminada por humanos.</p>
+        </div>
+        <div class="fact-card">
+          <h3><i class="fas fa-bullseye"></i> Caza ilegal</h3>
+          <p>Víctimas de creencias falsas o prácticas culturales.</p>
+        </div>
+        <div class="fact-card">
+          <h3><i class="fas fa-road"></i> Pérdida de hábitat</h3>
+          <p>Construcción de carreteras y expansión agrícola.</p>
+        </div>
+        <div class="fact-card">
+          <h3><i class="fas fa-wind"></i> Colisiones</h3>
+          <p>Accidentes con tendidos eléctricos o aerogeneradores.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="video" class="fade-in">
+      <h2><i class="fas fa-video"></i> Documental sobre el Cóndor</h2>
+      <p>Descubre más sobre esta impresionante ave en este documental:</p>
+      <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/kcCiUMWrY1o" title="El Cóndor Andino - Documental" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section id="conservacion" class="fade-in">
+      <h2><i class="fas fa-hand-holding-heart"></i> Esfuerzos de Conservación</h2>
+      <p>Organizaciones e instituciones trabajan para proteger al cóndor:</p>
+      <ul>
+        <li><strong>Proyecto Cóndor Andino:</strong> Conservación y liberación de ejemplares</li>
+        <li><strong>SERNANP y ONGs:</strong> Monitoreo de nidos y educación comunitaria</li>
+        <li><strong>Programas de crianza:</strong> Zoológicos en Argentina, Perú y Colombia</li>
+        <li><strong>Leyes nacionales:</strong> Protección legal en varios países</li>
+      </ul>
+      <p>El cóndor es parte vital del ecosistema andino y un símbolo cultural de gran importancia.</p>
+    </section>
+  </div>
+
+  <footer class="fade-in">
+    <p>© 2025 Conservación del Cóndor Andino - Sudamérica</p>
+    <p>Información actualizada a julio 2025</p>
+  </footer>
+
+  <div class="scroll-top" id="scrollTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script>
+        // Efecto de aparición al hacer scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const appearOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            appearOnScroll.observe(element);
+        });
+
+        // Botón de scroll arriba
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Efecto de hover en las tarjetas
+        const factCards = document.querySelectorAll('.fact-card');
+        
+        factCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('i');
+                icon.classList.add('fa-bounce');
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('i');
+                icon.classList.remove('fa-bounce');
+            });
+        });
+
+        // Efecto de parallax en el header
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const header = document.querySelector('header');
+            header.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+
+        // Animación de tipeo para el título
+        const title = document.querySelector('h1');
+        const titleText = title.textContent;
+        title.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < titleText.length) {
+                title.textContent += titleText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        };
+        
+        setTimeout(typeWriter, 500);
+
+        // Crear efecto de burbujas flotantes
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble-effect';
+            
+            const size = Math.random() * 30 + 10;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            bubble.style.left = `${Math.random() * 80 + 10}%`;
+            bubble.style.top = `${Math.random() * 100 + 100}%`;
+            bubble.style.animationDuration = `${Math.random() * 10 + 5}s`;
+            bubble.style.animationDelay = `${Math.random() * 5}s`;
+            
+            document.body.appendChild(bubble);
+            
+            // Eliminar después de la animación
+            setTimeout(() => {
+                bubble.remove();
+            }, parseFloat(bubble.style.animationDuration) * 1000);
+        }
+
+        // Crear burbujas periódicamente
+        setInterval(createBubble, 2000);
+        
+        // Crear algunas burbujas iniciales
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createBubble, i * 300);
+        }
+    </script>
+</body>
+</html>

@@ -521,3 +521,54 @@ canvas {
     text-align: center;
   }
 }
+.door-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Quitar esto: background: black; */
+  overflow: hidden;
+  pointer-events: none;
+  background: transparent; /* transparente para que se vea lo de atrás */
+}
+
+.door {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 2s ease-in-out;
+}
+
+.left-door {
+  transform: translateX(0);
+}
+
+.right-door {
+  transform: translateX(0);
+}
+
+.door.open-left {
+  transform: translateX(-100%);
+}
+
+.door.open-right {
+  transform: translateX(100%);
+}
+.btn-music-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

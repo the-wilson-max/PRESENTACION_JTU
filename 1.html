@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gato Andino Esquiva Basura Mejorado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            background: radial-gradient(circle at 60% 20%, #d2ffea 0%, #e3e9db 80%) fixed, url('minigames/ambiente.jpg') center center / cover no-repeat fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .title-box {
+            position: relative;
+            background: linear-gradient(90deg, #38b879 0%, #4a7f55 100%);
+            color: #fff;
+            border-radius: 32px 32px 20px 20px;
+            padding: 18px 50px 22px 50px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            box-shadow: 0 12px 32px #0006;
+            font-size: 2.6em;
+            letter-spacing: 2.5px;
+            font-family: 'Luckiest Guy', cursive;
+            text-shadow: 2px 3px 10px #296b2e8a, 0 2px 0 #fff8;
+            overflow: visible;
+            animation: bounceTitle 1.3s cubic-bezier(.5,1.8,.5,1) 1;
+        }
+        .title-glow {
+            position: absolute;
+            left: 50%; top: 100%;
+            transform: translate(-50%, -40%);
+            width: 180px; height: 40px;
+            background: radial-gradient(circle, #4a7f5588 0%, transparent 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        @keyframes bounceTitle {
+            0% { transform: scale(0.8) translateY(-35px); opacity: 0; }
+            60% { transform: scale(1.08) translateY(5px); opacity: 1; }
+            80% { transform: scale(0.95) translateY(0); }
+            100% { transform: scale(1) translateY(0); }
+        }
+        .sparkle {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            pointer-events: none;
+            animation: sparkle 1.8s infinite linear;
+        }
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0.7) rotate(0deg);}
+            45%{ opacity: 1; transform: scale(1.2) rotate(45deg);}
+            65%{ opacity: 0.9; }
+            100%{ opacity: 0; transform: scale(0.6) rotate(100deg);}
+        }
+        #gameContainer {
+            position: relative;
+            margin: 0 auto;
+            width: 400px;
+            height: 500px;
+            max-width: 96vw;
+            max-height: 70vh;
+            background: linear-gradient(180deg, #e3e9dbcc 70%, #b0d7b8cc 100%);
+            border: 5px solid #4a7f55;
+            border-radius: 32px;
+            box-shadow: 0 12px 48px #0004;
+            overflow: hidden;
+            touch-action: none;
+            animation: popGame .6s cubic-bezier(.7,2,.6,.8);
+        }
+        @keyframes popGame {
+            from { transform: scale(0.7); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+        #hud {
+            position: absolute;
+            top: 12px;
+            left: 0;
+            width: 100%;
+            color: #227d3c;
+            font-size: 1.2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 14px;
+            z-index: 2;
+            pointer-events: none;
+            user-select: none;
+            text-shadow: 1px 1px 2px #fff, 0 0 6px #fff;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        #score {
+            background: rgba(255,255,255,0.92);
+            padding: 2px 18px 2px 12px;
+            border-radius: 14px;
+            font-size: 1.18em;
+            box-shadow: 0 3px 8px #38b8792a;
+            border: 2px solid #38b87988;
+            transition: background 0.25s;
+        }
+        #score.animated {
+            animation: scoreBounce .5s;
+        }
+        @keyframes scoreBounce {
+            0% { transform: scale(1); }
+            40% { transform: scale(1.14); background: #bafdcf; }
+            80% { transform: scale(0.97); }
+            100% { transform: scale(1); background: rgba(255,255,255,0.92);}
+        }
+        #lives {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        .heart {
+            width: 33px;
+            height: 33px;
+            vertical-align: middle;
+            margin-left: 2px;
+            animation: heartPop .3s;
+        }
+        @keyframes heartPop {
+            0% { transform: scale(0.5); opacity: 0;}
+            60%{ transform: scale(1.12); opacity: 1;}
+            100%{ transform: scale(1);}
+        }
+        #musicBtn {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+            z-index: 10;
+            border: none;
+            background: linear-gradient(140deg, #fff 80%, #b0d7b8cc 100%);
+            border-radius: 50%;
+            width: 54px;
+            height: 54px;
+            box-shadow: 0 2px 10px #0004;
+            font-size: 2em;
+            color: #4a7f55;
+            cursor: pointer;
+            transition: background 0.27s, color 0.27s;
+        }
+        #musicBtn.off { background: #4a7f55; color: #fff; }
+        canvas#gameCanvas {
+            position: absolute;
+            left: 0; top: 0;
+            z-index: 1;
+            background: transparent;
+            touch-action: none;
+            width: 100%!important;
+            height: 100%!important;
+        }
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(40,80,60,0.65);
+            display: none;
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        .overlay.show { display: flex; }
+        .modal {
+            background: #fff;
+            border-radius: 22px;
+            padding: 34px 20px 22px 20px;
+            box-shadow: 0 12px 32px #0003;
+            max-width: 350px;
+            margin: 0 auto;
+            text-align: center;
+            animation: popin 0.65s cubic-bezier(.61,-0.01,.54,.82);
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        @keyframes popin {
+            from { transform: scale(0.7); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+        button {
+            background: linear-gradient(90deg, #38b879 60%, #4a7f55 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 13px 38px;
+            font-size: 1.15em;
+            margin-top: 18px;
+            cursor: pointer;
+            font-family: 'Luckiest Guy', cursive;
+            transition: background 0.18s, transform 0.22s;
+            box-shadow: 0 4px 16px #38b87948;
+        }
+        button:hover { background: #2e5735; transform: scale(1.08);}
+        .cat-end-img {
+            margin: 14px auto 0 auto;
+            width: 90px;
+            height: 106px;
+            display: block;
+            filter: drop-shadow(0 0 16px #4a7f5588);
+            animation: catEndPop .7s cubic-bezier(.6,1.6,.6,1);
+        }
+        @keyframes catEndPop {
+            0% { transform: scale(0.7) rotate(-12deg); opacity: 0;}
+            70%{ transform: scale(1.12) rotate(8deg);}
+            100%{ transform: scale(1) rotate(0);}
+        }
+        .animal-info {
+            background: #f6fffc;
+            color: #296b2e;
+            border-radius: 12px;
+            padding: 11px 12px;
+            margin-top: 10px;
+            font-size: 1.04em;
+            text-align: left;
+            box-shadow: 0 2px 8px #38b8791a;
+        }
+        #controlsBox {
+            width: 98vw;
+            max-width: 440px;
+            margin: 18px auto 10px auto;
+            background: linear-gradient(90deg, #fff 82%, #b0d7b8cc 100%);
+            border-radius: 18px;
+            box-shadow: 0 4px 16px #38b87922;
+            padding: 12px 18px 11px 18px;
+            color: #2e5735;
+            font-size: 1.12em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .controls-list {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .kbd {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: #e3e9db;
+            border: 2px solid #4a7f55;
+            border-radius: 8px;
+            padding: 4px 12px;
+            margin: 0 2px;
+            color: #296b2e;
+            font-size: 1.08em;
+            box-shadow: 0 2px 8px #38b87922;
+        }
+        @media (max-width: 600px) {
+            #gameContainer {
+                width: 98vw;
+                height: calc(98vw * 1.25);
+                max-width: 440px;
+                max-height: 560px;
+            }
+            #controlsBox {
+                font-size: 1em;
+                max-width: 98vw;
+            }
+            .title-box { font-size: 2em; padding: 16px 20px 16px 20px;}
+        }
+    </style>
+</head>
+<body>
+<div class="title-box">
+    Gato Andino Esquiva Basura
+    <div class="title-glow"></div>
+    <img src="minigames/gato-andino.png" style="position:absolute;left:24px;top:-36px;width:75px;z-index:10;animation:catEndPop 1.2s;" alt="gato andino"/>
+    <img src="minigames/corazon.png" class="sparkle" style="left:10%;top:-14px;">
+    <img src="minigames/botella.png" class="sparkle" style="left:75%;top:-18px;">
+</div>
+<div id="gameContainer">
+    <canvas id="gameCanvas" width="400" height="500"></canvas>
+    <div id="hud">
+        <span id="score">Puntaje: 0</span>
+        <span id="lives"></span>
+    </div>
+    <button id="musicBtn" title="Música">&#x1F3B5;</button>
+</div>
+<div id="controlsBox">
+    <b>Controles:</b>
+    <div class="controls-list">
+        <span>Izquierda:</span> <span class="kbd">⬅️</span> <span class="kbd">A</span>
+        <span>Derecha:</span> <span class="kbd">➡️</span> <span class="kbd">D</span>
+        <span>Toque:</span> <span class="kbd">Lado izquierdo/derecho</span>
+        <span>Reiniciar:</span> <span class="kbd">Jugar de nuevo</span>
+        <span>Música:</span> <span class="kbd">&#x1F3B5;</span>
+    </div>
+</div>
+<div id="overlay" class="overlay show">
+    <div class="modal">
+        <h1 style="font-family:'Luckiest Guy',cursive;font-size:2em;color:#38b879;text-shadow:0 2px 8px #4a7f558a;">Gato Andino Esquiva Basura</h1>
+        <p>Ayuda al gato andino a esquivar la basura y la escopeta.<br>
+        Usa las flechas o toca los lados de la pantalla.<br>
+        ¡Consigue la mejor puntuación!</p>
+        <button id="startBtn">Jugar</button>
+    </div>
+</div>
+<div id="gameOver" class="overlay">
+    <div class="modal">
+        <h1>¡Fin del juego!</h1>
+        <img src="minigames/gato-andino.png" class="cat-end-img" id="catEndImg" alt="gato andino">
+        <p id="finalScore"></p>
+        <div id="animalInfo" class="animal-info"></div>
+        <button id="restartBtn">Jugar de nuevo</button>
+    </div>
+</div>
+<audio id="bgMusic" src="minigames/musica.mp3" preload="auto" loop></audio>
+<audio id="hitSound" src="minigames/golpe.mp3" preload="auto"></audio>
+<audio id="pointSound" src="https://cdn.pixabay.com/audio/2022/02/23/audio_115b9e5b75.mp3" preload="auto"></audio>
+<audio id="shotSound" src="minigames/disparo.mp3" preload="auto"></audio>
+<audio id="lifeSound" src="minigames/life.mp3" preload="auto"></audio>
+<script>
+// ============ CONFIGURACIÓN DE IMÁGENES Y SONIDOS =============
+const BG_IMG = "minigames/fondo.jpg";
+const CAT_IMG = "minigames/gato-andino.png";
+const SHOTGUN_IMG = "minigames/escopeta.png";
+const HEART_IMG = "minigames/corazon.png";
+const TRASH_IMAGES = [
+    "minigames/botella.png",
+    "minigames/bolsa.png",
+    "minigames/lata.png"
+];
+const LIFE_IMG = "minigames/corazon.png";
+const ANIMAL_FACTS = [
+    "El gato andino (Leopardus jacobita) habita en zonas altas de la Cordillera de los Andes, principalmente en Perú, Bolivia, Chile y Argentina.",
+    "Es uno de los felinos más amenazados de Sudamérica y está catalogado como especie en peligro.",
+    "Prefiere terrenos rocosos y escarpados a más de 3,000 metros sobre el nivel del mar.",
+    "Su dieta se basa principalmente en roedores de alta montaña, como la vizcacha.",
+    "El gato andino es muy difícil de observar en estado salvaje debido a su naturaleza esquiva y a su bajo número poblacional."
+];
+
+// ============ PARÁMETROS DEL JUEGO ============
+const CAT_WIDTH = 56, CAT_HEIGHT = 65;
+const TRASH_SIZE = 54;
+const LIFE_SIZE = 44;
+const GAME_W = 400, GAME_H = 500;
+const INITIAL_LIVES = 3;
+const SLOW_DURATION = 1300;
+
+let canvas, ctx, cat, trashList, lifeList, shotgun, animId;
+let score, lives, gameRunning, speed, spawnRate, lastSpawn, difficultyTimer;
+let leftPressed, rightPressed, touchX;
+let hitSound, pointSound, shotSound, bgMusic, lifeSound;
+let slowDownTimer = 0;
+let musicEnabled = true;
+let scoreAtLastShotgun = 0;
+let scoreAtLastLifeDrop = 0;
+
+// Pantallas y HUD
+const overlay = document.getElementById('overlay');
+const startBtn = document.getElementById('startBtn');
+const gameOverScreen = document.getElementById('gameOver');
+const finalScore = document.getElementById('finalScore');
+const restartBtn = document.getElementById('restartBtn');
+const scoreDisplay = document.getElementById('score');
+const livesDisplay = document.getElementById('lives');
+const animalInfo = document.getElementById('animalInfo');
+const musicBtn = document.getElementById('musicBtn');
+
+// Sonidos
+hitSound = document.getElementById('hitSound');
+pointSound = document.getElementById('pointSound');
+shotSound = document.getElementById('shotSound');
+bgMusic = document.getElementById('bgMusic');
+lifeSound = document.getElementById('lifeSound');
+
+// Carga previa de imágenes
+const bgImg = new Image(); bgImg.src = BG_IMG;
+const catImg = new Image(); catImg.src = CAT_IMG;
+const shotgunImg = new Image(); shotgunImg.src = SHOTGUN_IMG;
+const heartImg = new Image(); heartImg.src = HEART_IMG;
+const lifeImg = new Image(); lifeImg.src = LIFE_IMG;
+const trashImgs = TRASH_IMAGES.map(src => { let i = new Image(); i.src = src; return i; });
+
+// ============ FUNCIONES DE JUEGO =============
+
+function randInt(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
+function renderLives() {
+    livesDisplay.innerHTML = '';
+    for (let i = 0; i < lives; i++) {
+        let heart = document.createElement('img');
+        heart.src = HEART_IMG;
+        heart.className = "heart";
+        heart.alt = "vida";
+        livesDisplay.appendChild(heart);
+    }
+}
+function resetGame() {
+    cat = { x: canvas.width/2 - CAT_WIDTH/2, y: canvas.height - CAT_HEIGHT - 8, speed: 7, baseSpeed: 7, anim: 0 };
+    trashList = [];
+    lifeList = [];
+    shotgun = null;
+    score = 0;
+    lives = INITIAL_LIVES;
+    speed = 2.4;
+    spawnRate = 1100;
+    lastSpawn = 0;
+    difficultyTimer = 0;
+    leftPressed = rightPressed = false;
+    touchX = null;
+    gameRunning = true;
+    slowDownTimer = 0;
+    scoreAtLastShotgun = 0;
+    scoreAtLastLifeDrop = 0;
+    scoreDisplay.textContent = 'Puntaje: 0';
+    scoreDisplay.classList.remove('animated');
+    renderLives();
+}
+function drawCat() {
+    ctx.save();
+    if (cat.anim > 0) {
+        ctx.translate(cat.x+CAT_WIDTH/2, cat.y+CAT_HEIGHT/2);
+        ctx.rotate(Math.sin(cat.anim/80)*0.13);
+        ctx.drawImage(catImg, -CAT_WIDTH/2, -CAT_HEIGHT/2, CAT_WIDTH, CAT_HEIGHT);
+        ctx.restore();
+    } else {
+        ctx.drawImage(catImg, cat.x, cat.y, CAT_WIDTH, CAT_HEIGHT);
+        ctx.restore();
+    }
+}
+function drawTrash(t) {
+    let img = trashImgs[t.imgIndex];
+    ctx.save();
+    ctx.globalAlpha = t.hitAnim ? 0.6 : 1;
+    ctx.translate(t.x+TRASH_SIZE/2, t.y+TRASH_SIZE/2);
+    ctx.rotate(t.rot || 0);
+    ctx.drawImage(img, -TRASH_SIZE/2, -TRASH_SIZE/2, TRASH_SIZE, TRASH_SIZE);
+    ctx.restore();
+}
+function drawLife(l) {
+    ctx.save();
+    ctx.globalAlpha = 0.89;
+    ctx.drawImage(lifeImg, l.x, l.y, LIFE_SIZE, LIFE_SIZE);
+    ctx.restore();
+}
+function drawShotgun() {
+    if (!shotgun || !shotgun.active) return;
+    ctx.save();
+    ctx.globalAlpha = 0.95;
+    ctx.drawImage(shotgunImg, shotgun.x, shotgun.y, shotgun.width, shotgun.height);
+    ctx.restore();
+    if (shotgun.shooting) {
+        ctx.save();
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 8;
+        ctx.beginPath();
+        ctx.moveTo(shotgun.x + shotgun.width / 2, shotgun.y + shotgun.height);
+        ctx.lineTo(shotgun.x + shotgun.width / 2, shotgun.shootY);
+        ctx.stroke();
+        ctx.restore();
+    }
+}
+function drawParticles() {
+    // Simple sparkle effect on score
+    if (scoreDisplay.classList.contains("animated")) {
+        let sparkleCount = 4;
+        for (let i=0; i<sparkleCount; i++) {
+            let x = randInt(scoreDisplay.offsetLeft, scoreDisplay.offsetLeft+scoreDisplay.offsetWidth);
+            let y = randInt(scoreDisplay.offsetTop, scoreDisplay.offsetTop+scoreDisplay.offsetHeight);
+            ctx.save();
+            ctx.globalAlpha = 0.7;
+            ctx.fillStyle = "#38b879";
+            ctx.beginPath();
+            ctx.arc(x, y, randInt(3,7), 0, 2*Math.PI);
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+}
+function draw() {
+    if (bgImg.complete) ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+    else { ctx.fillStyle = "#e0f7fa"; ctx.fillRect(0,0,canvas.width,canvas.height); }
+    trashList.forEach(t => drawTrash(t));
+    lifeList.forEach(l => drawLife(l));
+    drawShotgun();
+    drawCat();
+    drawParticles();
+}
+function spawnTrash() {
+    const x = randInt(10, canvas.width - TRASH_SIZE - 10);
+    const imgIndex = randInt(0, TRASH_IMAGES.length - 1);
+    trashList.push({
+        x: x,
+        y: -TRASH_SIZE,
+        vy: speed + Math.random() * 0.7,
+        hitAnim: 0,
+        imgIndex: imgIndex,
+        rot: Math.random()*0.4-0.2
+    });
+}
+function spawnLife() {
+    const x = randInt(10, canvas.width - LIFE_SIZE - 10);
+    lifeList.push({
+        x: x,
+        y: -LIFE_SIZE,
+        vy: speed * 0.85 + Math.random() * 0.8,
+        pulse: 0
+    });
+}
+function spawnShotgun(force) {
+    const x = randInt(12, canvas.width - 60);
+    shotgun = {
+        x: x,
+        y: 0,
+        width: 60,
+        height: 40,
+        active: true,
+        shooting: false,
+        shootY: 40
+    };
+    shotSound.currentTime = 0;
+    shotSound.play();
+    if (force) scoreAtLastShotgun = score;
+}
+function updateShotgun(delta) {
+    if ((!shotgun || !shotgun.active) &&
+        ((score > 0 && score - scoreAtLastShotgun >= 50) || (Math.random() < delta/12000 && score%50 !== 0))
+    ) {
+        spawnShotgun(true);
+    }
+    if (!shotgun || !shotgun.active) return;
+    if (!shotgun.shooting && Math.random() < delta/1700) {
+        shotgun.shooting = true;
+        shotgun.shootY = shotgun.y + shotgun.height;
+        shotSound.currentTime = 0;
+        shotSound.play();
+    }
+    if (shotgun.shooting) {
+        shotgun.shootY += 16 * (canvas.height/GAME_H);
+        if (shotgun.shootY >= canvas.height) {
+            if (
+                cat.x < shotgun.x + shotgun.width &&
+                cat.x + CAT_WIDTH > shotgun.x
+            ) {
+                lives = 0;
+                renderLives();
+                gameOver();
+            }
+            shotgun.active = false;
+        }
+    }
+}
+function update(delta) {
+    difficultyTimer += delta;
+    if (difficultyTimer > 5400) {
+        speed += 0.22;
+        if (spawnRate > 440) spawnRate -= 60;
+        difficultyTimer = 0;
+    }
+    let moveSpeed = (slowDownTimer > 0) ? cat.baseSpeed * 0.5 : cat.baseSpeed;
+    moveSpeed *= canvas.width/GAME_W;
+    if (leftPressed) { cat.x -= moveSpeed; cat.anim = 55; }
+    if (rightPressed) { cat.x += moveSpeed; cat.anim = 55; }
+    if (touchX !== null) {
+        if (touchX < cat.x + CAT_WIDTH/2 - 8) {cat.x -= moveSpeed; cat.anim = 55;}
+        else if (touchX > cat.x + CAT_WIDTH/2 + 8) {cat.x += moveSpeed; cat.anim = 55;}
+    }
+    cat.x = Math.max(0, Math.min(canvas.width - CAT_WIDTH, cat.x));
+    if (cat.anim > 0) cat.anim -= delta; else cat.anim = 0;
+    let oldScore = score;
+    for (let i = trashList.length-1; i >= 0; i--) {
+        let t = trashList[i];
+        t.y += t.vy * (canvas.height/GAME_H);
+        t.rot += 0.02 + Math.random()*0.03;
+        if (t.hitAnim) t.hitAnim -= delta;
+        if (lives > 0 &&
+            t.y + TRASH_SIZE > cat.y + 10 &&
+            t.x + TRASH_SIZE > cat.x + 10 &&
+            t.x < cat.x + CAT_WIDTH - 10 &&
+            t.y < cat.y + CAT_HEIGHT - 10) {
+            t.hitAnim = 400;
+            trashList.splice(i,1);
+            lives--;
+            renderLives();
+            hitSound.currentTime = 0; hitSound.play();
+            slowDownTimer = SLOW_DURATION;
+            cat.anim = 120;
+            if (lives === 0) gameOver();
+        }
+        else if (t.y > canvas.height) {
+            trashList.splice(i,1);
+            score++;
+            scoreDisplay.textContent = 'Puntaje: ' + score;
+            scoreDisplay.classList.add("animated");
+            setTimeout(()=>scoreDisplay.classList.remove("animated"),330);
+            pointSound.currentTime = 0; pointSound.play();
+        }
+    }
+    if (score > 0 && (score % 50 === 0) && scoreAtLastLifeDrop !== score && lives < 3) {
+        spawnLife();
+        scoreAtLastLifeDrop = score;
+    }
+    for (let i = lifeList.length-1; i >= 0; i--) {
+        let l = lifeList[i];
+        l.y += l.vy * (canvas.height/GAME_H);
+        l.pulse += delta*0.004;
+        if (
+            l.y + LIFE_SIZE > cat.y + 12 &&
+            l.x + LIFE_SIZE > cat.x + 10 &&
+            l.x < cat.x + CAT_WIDTH - 10 &&
+            l.y < cat.y + CAT_HEIGHT - 10
+        ) {
+            if (lives < 3) {
+                lives++;
+                renderLives();
+                lifeSound.currentTime = 0;
+                lifeSound.play();
+            }
+            lifeList.splice(i,1);
+        } else if (l.y > canvas.height) {
+            lifeList.splice(i,1);
+        }
+    }
+    if (lives < 3 && Math.random() < delta/22000) {
+        spawnLife();
+    }
+    updateShotgun(delta);
+    if (slowDownTimer > 0) {
+        slowDownTimer -= delta;
+        if (slowDownTimer < 0) slowDownTimer = 0;
+    }
+}
+function loop(ts) {
+    if (!gameRunning) return;
+    let now = performance.now();
+    let delta = now - (loop.last || now);
+    loop.last = now;
+    if (now - lastSpawn > spawnRate) {
+        spawnTrash();
+        lastSpawn = now;
+    }
+    update(delta);
+    draw();
+    animId = requestAnimationFrame(loop);
+}
+function randomAnimalFact() {
+    return ANIMAL_FACTS[randInt(0, ANIMAL_FACTS.length-1)];
+}
+function gameOver() {
+    gameRunning = false;
+    setTimeout(()=>{
+        gameOverScreen.classList.add('show');
+        finalScore.textContent = 'Tu puntuación: ' + score;
+        animalInfo.textContent = randomAnimalFact();
+        pauseMusic();
+    }, 600);
+}
+function startGame() {
+    overlay.classList.remove('show');
+    gameOverScreen.classList.remove('show');
+    resetGame();
+    loop.last = undefined;
+    animId = requestAnimationFrame(loop);
+    playMusic();
+}
+
+// ====== Música de fondo ======
+function playMusic() {
+    if (musicEnabled) {
+        bgMusic.volume = 0.37;
+        bgMusic.play();
+    }
+}
+function pauseMusic() { bgMusic.pause(); }
+musicBtn.onclick = function() {
+    musicEnabled = !musicEnabled;
+    if (musicEnabled) {
+        playMusic();
+        musicBtn.classList.remove("off");
+    } else {
+        pauseMusic();
+        musicBtn.classList.add("off");
+    }
+};
+
+// ====== Entradas teclado/táctil ======
+window.addEventListener('keydown', e => {
+    if (!gameRunning) return;
+    if (e.key === 'ArrowLeft' || e.key === 'a') leftPressed = true;
+    if (e.key === 'ArrowRight' || e.key === 'd') rightPressed = true;
+});
+window.addEventListener('keyup', e => {
+    if (e.key === 'ArrowLeft' || e.key === 'a') leftPressed = false;
+    if (e.key === 'ArrowRight' || e.key === 'd') rightPressed = false;
+});
+function getCanvasTouchX(e) {
+    let rect = canvas.getBoundingClientRect();
+    return e.touches[0].clientX - rect.left;
+}
+canvas = document.getElementById('gameCanvas');
+canvas.addEventListener('touchstart', e => {
+    if (!gameRunning) return;
+    touchX = getCanvasTouchX(e);
+});
+canvas.addEventListener('touchmove', e => {
+    if (!gameRunning) return;
+    touchX = getCanvasTouchX(e);
+});
+canvas.addEventListener('touchend', e => { touchX = null; });
+document.body.addEventListener('touchmove', function(e){
+    if (gameRunning) e.preventDefault();
+},{passive:false});
+// ====== Botones ======
+startBtn.onclick = startGame;
+restartBtn.onclick = startGame;
+// ====== Responsive Canvas ======
+window.onload = function() {
+    canvas = document.getElementById('gameCanvas');
+    ctx = canvas.getContext('2d');
+    function resizeGameCanvas() {
+        let cont = document.getElementById('gameContainer');
+        let w = cont.offsetWidth;
+        let h = cont.offsetHeight;
+        canvas.width = w;
+        canvas.height = h;
+        if (cat) cat.x = Math.max(0, Math.min(canvas.width - CAT_WIDTH, cat.x));
+        draw();
+    }
+    window.addEventListener('resize', resizeGameCanvas);
+    resizeGameCanvas();
+    draw();
+    overlay.classList.add('show');
+};
+</script>
+</body>
+</html>

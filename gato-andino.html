@@ -383,6 +383,40 @@
     transform: translate(-400px, 100vh) rotate(360deg) scale(1);
   }
 }
+
+.gato-andino {
+  position: fixed;
+  top: 590px; /* ajusta según la altura deseada */
+  left: -200px; /* empieza fuera de la pantalla */
+  width: 150px; /* tamaño del gato */
+  z-index: 20;
+  animation: entrarSalir 8s ease-in-out forwards;
+  pointer-events: none;
+}
+
+@keyframes entrarSalir {
+  0% {
+    left: -200px;
+    opacity: 0;
+  }
+  10% {
+    left: 50px;
+    opacity: 1;
+  }
+  50% {
+    left: 60%;
+    opacity: 1;
+  }
+  90% {
+    left: 100%;
+    opacity: 0.8;
+  }
+  100% {
+    left: 110%;
+    opacity: 0;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -409,6 +443,8 @@
   <img src="uploads/hoja2.png" class="leaf" style="--delay: 19s; --size: 55px; left: 95%;">
   <img src="uploads/hoja2.png" class="leaf" style="--delay: 20s; --size: 45px; left: 12%;">
 </div>
+
+<img src="minigames/gato-andino.png" alt="Gato Andino volando" class="gato-andino">
     <header>
         <h1 class="floating">El Gato Andino</h1>
         <p class="subtitle">El felino más misterioso y amenazado de los Andes peruanos</p>
@@ -604,6 +640,24 @@
         };
         
         setTimeout(typeWriter, 500);
+
+        function lanzarGato() {
+    const img = document.createElement('img');
+    img.src = 'minigames/gato-andino.png';
+    img.alt = 'Gato Andino volando';
+    img.className = 'gato-andino';
+    document.body.appendChild(img);
+
+    setTimeout(() => {
+      img.remove();
+    }, 9000); // se elimina después de la animación
+  }
+
+  // Lanza el gato cada 15 segundos
+  setInterval(lanzarGato, 15000);
+
+  // Opcional: lanzar uno al cargar
+  lanzarGato();
     </script>
 
 </body>

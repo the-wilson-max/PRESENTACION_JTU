@@ -136,3 +136,74 @@ function showRandomAnimal() {
   animateAnimalChange(idx);
 }
 setInterval(showRandomAnimal, 3000);
+window.addEventListener('load', () => {
+  const leftDoor = document.querySelector('.left-door');
+  const rightDoor = document.querySelector('.right-door');
+  const container = document.getElementById('doorContainer');
+
+  setTimeout(() => {
+    leftDoor.classList.add('open-left');
+    rightDoor.classList.add('open-right');
+  }, 500); // espera 0.5s y luego abre
+
+  setTimeout(() => {
+    container.style.display = 'none'; // oculta el contenedor tras la animación
+  }, 2500); // espera 2.5s para ocultarlo
+});
+ const videoId = "  c5P_awdbVuA"; // ejemplo: "dQw4w9WgXcQ"
+
+  // Carga la API de YouTube
+  const tag = document.createElement("script");
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName("script")[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  let player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player("ytplayer", {
+      height: "0",
+      width: "0",
+      videoId: videoId,
+      playerVars: {
+        autoplay: 1,
+        loop: 1,
+        playlist: videoId,
+        controls: 0,
+        mute: 0
+      },
+      events: {
+        onReady: function (event) {
+          event.target.setVolume(30); // puedes ajustar el volumen
+          event.target.playVideo();
+        }
+      }
+    });
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+  const music = document.getElementById('backgroundMusic');
+
+  // Verifica si ya se reprodujo la música en esta sesión
+  if (!sessionStorage.getItem('musicPlayed')) {
+    music.play().then(() => {
+      sessionStorage.setItem('musicPlayed', 'true');
+    }).catch(err => {
+      console.log('Autoplay bloqueado:', err);
+    });
+  }
+});
+const music = document.getElementById('backgroundMusic');
+const toggleBtn = document.getElementById('toggleMusicBtn');
+
+// Estado inicial
+let musicPlaying = false;
+
+toggleBtn.addEventListener('click', () => {
+  if (musicPlaying) {
+    music.pause();
+    toggleBtn.textContent = '🔇 Música';
+  } else {
+    music.play().catch(err => console.log('Error al reproducir:', err));
+    toggleBtn.textContent = '🔊 Música';
+  }
+  musicPlaying = !musicPlaying;
+});

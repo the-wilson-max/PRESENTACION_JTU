@@ -453,7 +453,29 @@
   }
 }
 
+.mono-choro {
+  position: fixed;
+  bottom: -150px;
+  left: 93%;
+  transform: translateX(-50%);
+  width: 200px;
+  z-index: 100;
+  animation: subirMono 6s linear forwards;
+}
 
+@keyframes subirMono {
+  0% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-100vh);
+    opacity: 0;
+  }
+}
     </style>
 </head>
 <body>
@@ -726,6 +748,23 @@ function crearHormiga() {
 // Repetir cada cierto tiempo
 setInterval(crearHormiga, 5000); // cada 5 segundos
 
+function lanzarMono() {
+  const mono = document.createElement("img");
+  mono.src = "minigames/mono.png"; // Cambia por la ruta correcta
+  mono.className = "mono-choro";
+
+  document.body.appendChild(mono);
+
+  setTimeout(() => {
+    mono.remove();
+  }, 6000); // Duración de la animación
+}
+
+// Lanza el mono al cargar la página
+lanzarMono();
+
+// Y lo lanza cada 20 segundos
+setInterval(lanzarMono, 20000);
     </script>
 
 </body>

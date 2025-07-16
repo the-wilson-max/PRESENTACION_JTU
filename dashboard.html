@@ -41,7 +41,7 @@
         <h2 id="logo-fallback" style="display: none" class="sidebar-title">
           Mercado SD
         </h2>
-        <h2 class="sidebar-title">Asociación del Mercado Santo Domingo</h2>
+        <h2 class="sidebar-title">Jose de la Torre Ugarte</h2>
       </div>
       <nav
         class="sidebar-menu"
@@ -68,18 +68,14 @@
           <span class="material-icons">pets</span>
           <span class="menu-text">Rana Titicaca</span>
         </div>
-        <div class="menu-item" tabindex="0" role="menuitem">
-          <span class="material-icons">person</span>
-          <span class="menu-text">Perfil</span>
-        </div>
-        <div class="menu-item" tabindex="0" role="menuitem">
-          <span class="material-icons">message</span>
-          <span class="menu-text">Mensajes</span>
+        <div class="menu-item" data-target="perfil-container" tabindex="0" role="menuitem">
+          <span class="material-icons">petsn</span>
+          <span class="menu-text">Condor Andino</span>
         </div>
       </nav>
       <button id="logoutBtn" class="btn-logout" aria-label="Cerrar sesión">
         <span class="material-icons" aria-hidden="true">logout</span>
-        <span>Cerrar sesión</span>
+        <span>salir</span>
       </button>
     </aside>
     <main class="main-content">
@@ -107,12 +103,9 @@
         <iframe src="gato-andino.html"></iframe>
       </div>
       <div id="perfil-container" style="display: none">
-        <iframe src="perfil.html"></iframe>
+        <iframe src="condor-andino.html"></iframe>
       </div>
-      <!-- NUEVO: Contenedor del chat global -->
-      <div id="mensajes-container" style="display: none">
-        <iframe src="chat-global.html"></iframe>
-      </div>
+      
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>

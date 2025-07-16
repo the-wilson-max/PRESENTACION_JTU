@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
+    <div id="ytplayer" style="display: none;"></div>
+    <div class="door-container" id="doorContainer">
+  <img src="uploads/puerta.png" class="door left-door" />
+  <img src="uploads/puerta2.png" class="door right-door" />
+</div>
     <!-- Video de fondo -->
     <div class="video-bg">
       <video autoplay loop muted playsinline id="bgVideo">
@@ -84,6 +89,11 @@
       preload="auto"
       muted
     ></video>
+    <audio id="backgroundMusic" loop>
+  <source src="uploads/fondo.mp3" type="audio/mpeg" />
+  Tu navegador no soporta audio HTML5.
+</audio>
+<button class="btn-music-toggle" id="toggleMusicBtn">🔇 Música</button>
 
     <script src="js/main.js"></script>
   </body>

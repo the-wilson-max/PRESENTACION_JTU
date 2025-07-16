@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>La Pava Aliblanca - Vuelo Selvático</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #87CEEB 0%, #98FB98 50%, #F0E68C 100%) fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            overflow-x: hidden;
+        }
+        
+        .title-box {
+            position: relative;
+            background: linear-gradient(90deg, #8B4513 0%, #A0522D 50%, #D2691E 100%);
+            color: #fff;
+            border-radius: 38px 38px 20px 20px;
+            padding: 24px 64px 22px 64px;
+            margin-top: 22px;
+            margin-bottom: 12px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+            font-size: 2.16em;
+            letter-spacing: 2.2px;
+            font-family: 'Luckiest Guy', cursive;
+            text-shadow: 2px 3px 10px rgba(139,69,19,0.6), 0 2px 0 rgba(255,255,255,0.3);
+            animation: bounceTitle 1.3s cubic-bezier(.5,1.8,.5,1) 1;
+            overflow: visible;
+        }
+        
+        .title-glow {
+            position: absolute;
+            left: 50%; top: 100%;
+            transform: translate(-50%, -40%);
+            width: 250px; height: 44px;
+            background: radial-gradient(circle, rgba(139,69,19,0.4) 0%, transparent 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        @keyframes bounceTitle {
+            0% { transform: scale(0.8) translateY(-35px); opacity: 0; }
+            60% { transform: scale(1.08) translateY(5px); opacity: 1; }
+            80% { transform: scale(0.95) translateY(0); }
+            100% { transform: scale(1) translateY(0); }
+        }
+        
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            animation: floatAround 3s infinite ease-in-out;
+        }
+        
+        @keyframes floatAround {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        
+        #gameContainer {
+            position: relative;
+            margin: 0 auto;
+            width: 500px;
+            height: 400px;
+            max-width: 96vw;
+            max-height: 60vh;
+            background: linear-gradient(180deg, #87CEEB 0%, #98FB98 60%, #228B22 100%);
+            border: 5px solid #8B4513;
+            border-radius: 32px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+            overflow: hidden;
+            touch-action: none;
+            animation: popGame .7s cubic-bezier(.7,2,.6,.8);
+        }
+        
+        @keyframes popGame {
+            from { transform: scale(0.7); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+        
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #hud {
+            position: absolute;
+            top: 12px;
+            left: 0;
+            width: 100%;
+            color: #2F4F2F;
+            font-size: 1.18em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 18px;
+            z-index: 2;
+            pointer-events: none;
+            user-select: none;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8), 0 0 6px rgba(255,255,255,0.6);
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        
+        #score {
+            background: rgba(255,255,255,0.92);
+            padding: 2px 18px 2px 12px;
+            border-radius: 14px;
+            font-size: 1.14em;
+            box-shadow: 0 3px 8px rgba(139,69,19,0.3);
+            border: 2px solid rgba(139,69,19,0.5);
+            transition: all 0.25s;
+        }
+        
+        #score.animated {
+            animation: scoreBounce .5s;
+        }
+        
+        @keyframes scoreBounce {
+            0% { transform: scale(1); }
+            40% { transform: scale(1.14); background: rgba(240,230,140,0.9); }
+            80% { transform: scale(0.97); }
+            100% { transform: scale(1); background: rgba(255,255,255,0.92);}
+        }
+        
+        #lives {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .heart {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(45deg, #FF6B6B, #FF8E8E);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            transform: rotate(-45deg);
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: '';
+            width: 16px;
+            height: 24px;
+            position: absolute;
+            left: 8px;
+            top: 0;
+            background: linear-gradient(45deg, #FF6B6B, #FF8E8E);
+            border-radius: 16px 16px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.1); }
+        }
+        
+        .power-indicator {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.95);
+            padding: 6px 16px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            color: #2F4F2F;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+            z-index: 10;
+            display: none;
+            animation: powerPop 0.4s ease-out;
+        }
+        
+        @keyframes powerPop {
+            0% { transform: translateX(-50%) scale(0.8); opacity: 0; }
+            100% { transform: translateX(-50%) scale(1); opacity: 1; }
+        }
+        
+        #gameOver {
+            position: absolute;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75);
+            display: none;
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #gameOver.show { display: flex; }
+        
+        .modal {
+            background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+            border-radius: 22px;
+            padding: 34px 20px 22px 20px;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+            max-width: 350px;
+            margin: 0 auto;
+            text-align: center;
+            animation: popin 0.65s cubic-bezier(.61,-0.01,.54,.82);
+            font-family: 'Montserrat', Arial, sans-serif;
+            border: 3px solid #8B4513;
+        }
+        
+        @keyframes popin {
+            from { transform: scale(0.7); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+        
+        button {
+            background: linear-gradient(90deg, #8B4513 0%, #A0522D 50%, #D2691E 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 13px 38px;
+            font-size: 1.13em;
+            margin-top: 18px;
+            cursor: pointer;
+            font-family: 'Luckiest Guy', cursive;
+            transition: all 0.22s;
+            box-shadow: 0 6px 20px rgba(139,69,19,0.4);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        button:hover { 
+            background: linear-gradient(90deg, #A0522D 0%, #D2691E 50%, #DAA520 100%);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(139,69,19,0.6);
+        }
+        
+        .pava-end-img {
+            margin: 14px auto 0 auto;
+            width: 80px;
+            height: 80px;
+            display: block;
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            border-radius: 50%;
+            position: relative;
+            animation: pavaEndFloat 2s infinite ease-in-out;
+        }
+        
+        .pava-end-img::before {
+            content: '🦅';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+        }
+        
+        @keyframes pavaEndFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+        
+        #controlsBox {
+            width: 98vw;
+            max-width: 540px;
+            margin: 18px auto 10px auto;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,230,140,0.8) 100%);
+            border-radius: 18px;
+            box-shadow: 0 4px 16px rgba(139,69,19,0.3);
+            padding: 12px 18px 11px 18px;
+            color: #2F4F2F;
+            font-size: 1.12em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid rgba(139,69,19,0.2);
+        }
+        
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            width: 100%;
+            margin-top: 8px;
+        }
+        
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        .kbd {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: rgba(240,230,140,0.8);
+            border: 2px solid #8B4513;
+            border-radius: 8px;
+            padding: 4px 12px;
+            color: #2F4F2F;
+            font-size: 1.08em;
+            box-shadow: 0 2px 8px rgba(139,69,19,0.2);
+            font-weight: 600;
+        }
+        
+        .altitude-indicator {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 60%;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            z-index: 5;
+            border: 2px solid rgba(139,69,19,0.5);
+        }
+        
+        .altitude-bar {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to top, #FF6B6B, #FFE135, #4ECDC4);
+            border-radius: 8px;
+            transition: height 0.2s ease;
+        }
+        
+        .combo-display {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #FF6B35, #F7931E);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            box-shadow: 0 4px 16px rgba(255,107,53,0.5);
+            z-index: 10;
+            display: none;
+            animation: comboGlow 0.6s ease-out;
+        }
+        
+        @keyframes comboGlow {
+            0% { transform: translateX(-50%) scale(0.8); opacity: 0; }
+            50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+            100% { transform: translateX(-50%) scale(1); opacity: 1; }
+        }
+        
+        /* Nubes de fondo animadas */
+        .cloud {
+            position: absolute;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50px;
+            opacity: 0.6;
+            animation: cloudMove 20s linear infinite;
+        }
+        
+        .cloud:before,
+        .cloud:after {
+            content: '';
+            position: absolute;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50px;
+        }
+        
+        .cloud1 {
+            width: 80px;
+            height: 30px;
+            top: 10%;
+            left: -100px;
+        }
+        
+        .cloud1:before {
+            width: 40px;
+            height: 40px;
+            top: -15px;
+            left: 10px;
+        }
+        
+        .cloud1:after {
+            width: 60px;
+            height: 35px;
+            top: -10px;
+            right: 10px;
+        }
+        
+        .cloud2 {
+            width: 60px;
+            height: 25px;
+            top: 30%;
+            left: -80px;
+            animation-delay: -10s;
+        }
+        
+        .cloud2:before {
+            width: 30px;
+            height: 30px;
+            top: -10px;
+            left: 8px;
+        }
+        
+        .cloud2:after {
+            width: 45px;
+            height: 28px;
+            top: -8px;
+            right: 8px;
+        }
+        
+        @keyframes cloudMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw + 200px)); }
+        }
+        
+        @media (max-width: 600px) {
+            #gameContainer {
+                width: 98vw;
+                height: calc(98vw * 0.8);
+                max-width: 480px;
+                max-height: 400px;
+            }
+            
+            #controlsBox {
+                font-size: 1em;
+                max-width: 98vw;
+                padding: 10px 15px;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .title-box { 
+                font-size: 1.8em; 
+                padding: 16px 30px 16px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    
+    <div class="title-box">
+        Pava Aliblanca - Vuelo Selvático
+        <div class="title-glow"></div>
+        <div class="floating-element" style="left: 20px; top: -25px; font-size: 40px;">🦅</div>
+        <div class="floating-element" style="right: 20px; top: -20px; font-size: 25px;">🌿</div>
+        <div class="floating-element" style="left: 60%; top: -30px; font-size: 20px;">🌰</div>
+    </div>
+    
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="500" height="400"></canvas>
+        <div id="hud">
+            <span id="score">Semillas: 0</span>
+            <span id="lives"></span>
+        </div>
+        <div class="altitude-indicator">
+            <div class="altitude-bar" id="altitudeBar"></div>
+        </div>
+        <div class="power-indicator" id="powerIndicator"></div>
+        <div class="combo-display" id="comboDisplay"></div>
+        
+        <div id="gameOver">
+            <div class="modal">
+                <h1>¡Fin del vuelo!</h1>
+                <div class="pava-end-img"></div>
+                <p id="finalScore"></p>
+                <p id="flightStats"></p>
+                <button id="restartBtn">Volar de nuevo</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="controlsBox">
+        <b>🎮 Controles de Vuelo:</b>
+        <div class="controls-grid">
+            <div class="control-item">
+                <span>Subir:</span> 
+                <span class="kbd">↑</span> 
+                <span class="kbd">W</span>
+                <span class="kbd">Espacio</span>
+            </div>
+            <div class="control-item">
+                <span>Bajar:</span> 
+                <span class="kbd">↓</span> 
+                <span class="kbd">S</span>
+            </div>
+            <div class="control-item">
+                <span>Planeo:</span> 
+                <span class="kbd">No presionar nada</span>
+            </div>
+            <div class="control-item">
+                <span>Móvil:</span> 
+                <span class="kbd">Toca arriba/abajo</span>
+            </div>
+        </div>
+    </div>
+<script>
+// 1. Obtener el canvas
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+// 2. Cargar imágenes
+const imgPava = new Image();
+imgPava.src = "minigames/pava.png";
+
+const imgBala = new Image();
+imgBala.src = "minigames/bala.png";
+
+// 3. Variables del juego
+let pava = {
+    x: 80,
+    y: 200,
+    width: 110,
+    height: 110,
+    vy: 0,
+    gravity: 0.5,
+    lift: -8
+};
+
+let seeds = [];
+let bullets = [];
+let score = 0;
+let lives = 3;
+let isGameOver = false;
+
+// 4. Elementos del DOM
+const scoreEl = document.getElementById("score");
+const livesEl = document.getElementById("lives");
+const altitudeBar = document.getElementById("altitudeBar");
+const gameOverScreen = document.getElementById("gameOver");
+const finalScore = document.getElementById("finalScore");
+const flightStats = document.getElementById("flightStats");
+const restartBtn = document.getElementById("restartBtn");
+
+// 5. Dibujar vidas (corazones)
+function drawLives() {
+    livesEl.innerHTML = '';
+    for (let i = 0; i < lives; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        livesEl.appendChild(heart);
+    }
+}
+
+// 6. Crear semilla (círculo amarillo)
+function createSeed() {
+    seeds.push({
+        x: canvas.width,
+        y: Math.random() * (canvas.height - 50),
+        size: 20
+    });
+}
+
+// 7. Crear bala (obstáculo)
+function createBullet() {
+    bullets.push({
+        x: canvas.width,
+        y: Math.random() * (canvas.height - 60),
+        width: 45,
+        height: 30
+    });
+}
+
+// 8. Actualizar juego
+let seedTimer = 0;
+let bulletTimer = 0;
+
+function update() {
+    if (isGameOver) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Movimiento
+    pava.vy += pava.gravity;
+    pava.y += pava.vy;
+
+    if (pava.y < 0) pava.y = 0;
+    if (pava.y + pava.height > canvas.height) {
+        pava.y = canvas.height - pava.height;
+        pava.vy = 0;
+    }
+
+    // Dibujar la pava con imagen
+    ctx.drawImage(imgPava, pava.x, pava.y, pava.width, pava.height);
+
+    // Altitud visual
+    let altPercent = 1 - (pava.y / canvas.height);
+    altitudeBar.style.height = (altPercent * 100) + "%";
+
+    // Generar semillas y balas
+    seedTimer++;
+    bulletTimer++;
+
+    if (seedTimer > 90) {
+        createSeed();
+        seedTimer = 0;
+    }
+
+    if (bulletTimer > 120) {
+        createBullet();
+        bulletTimer = 0;
+    }
+
+    // Dibujar semillas
+    seeds.forEach((seed, index) => {
+        seed.x -= 4;
+
+        ctx.fillStyle = "#FFD700";
+        ctx.beginPath();
+        ctx.arc(seed.x, seed.y, seed.size / 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Colisión con la pava
+        if (
+            seed.x < pava.x + pava.width &&
+            seed.x + seed.size > pava.x &&
+            seed.y < pava.y + pava.height &&
+            seed.y + seed.size > pava.y
+        ) {
+            seeds.splice(index, 1);
+            score++;
+            scoreEl.textContent = "Semillas: " + score;
+            scoreEl.classList.add("animated");
+            setTimeout(() => scoreEl.classList.remove("animated"), 300);
+        }
+
+        if (seed.x + seed.size < 0) {
+            seeds.splice(index, 1);
+        }
+    });
+
+    // Dibujar balas (obstáculos)
+    bullets.forEach((bala, index) => {
+        bala.x -= 6;
+        ctx.drawImage(imgBala, bala.x, bala.y, bala.width, bala.height);
+
+        if (
+            bala.x < pava.x + pava.width &&
+            bala.x + bala.width > pava.x &&
+            bala.y < pava.y + pava.height &&
+            bala.y + bala.height > pava.y
+        ) {
+            bullets.splice(index, 1);
+            lives--;
+            drawLives();
+            if (lives <= 0) {
+                endGame();
+            }
+        }
+
+        if (bala.x + bala.width < 0) {
+            bullets.splice(index, 1);
+        }
+    });
+
+    requestAnimationFrame(update);
+}
+
+// 9. Controles
+document.addEventListener("keydown", (e) => {
+    if (["ArrowUp", "w", "W", " "].includes(e.key)) {
+        pava.vy = pava.lift;
+    }
+});
+canvas.addEventListener("touchstart", () => {
+    pava.vy = pava.lift;
+});
+
+// 10. Fin del juego
+function endGame() {
+    isGameOver = true;
+    finalScore.textContent = "Puntaje final: " + score;
+    flightStats.textContent = "¡La pava necesita descansar!";
+    gameOverScreen.classList.add("show");
+}
+
+// 11. Reiniciar
+restartBtn.addEventListener("click", () => {
+    score = 0;
+    lives = 3;
+    pava.y = 200;
+    pava.vy = 0;
+    seeds = [];
+    bullets = [];
+    isGameOver = false;
+    scoreEl.textContent = "Semillas: 0";
+    drawLives();
+    gameOverScreen.classList.remove("show");
+    update();
+});
+
+// Iniciar
+drawLives();
+update();
+</script>
+
