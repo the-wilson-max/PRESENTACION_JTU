@@ -267,6 +267,27 @@
             }
             .title-box { font-size: 2em; padding: 16px 20px 16px 20px;}
         }
+        #btn-info {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+#btn-info:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
     </style>
 </head>
 <body>
@@ -285,6 +306,7 @@
     </div>
     <button id="musicBtn" title="Música">&#x1F3B5;</button>
 </div>
+<a href="gato-andino.html" id="btn-info">Más información</a>
 <div id="controlsBox">
     <b>Controles:</b>
     <div class="controls-list">

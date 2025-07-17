@@ -290,6 +290,27 @@
     background-color: #228B22;
 }
 
+#btn-info {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+#btn-info:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
     </style>
 </head>
 <body>
@@ -307,6 +328,7 @@
         <span id="lives"></span>
     </div>
     <audio id="musica" src="minigames/musica.mp3" loop></audio>
+    <a href="rana-titicaca.html" id="btn-info">Más información</a>
 <button id="boton-musica">🔊 Música</button>
     <div class="power-indicator" id="powerIndicator"></div>
     <div class="combo-indicator" id="comboIndicator"></div>
