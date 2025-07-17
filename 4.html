@@ -270,6 +270,26 @@
             }
             .title-box { font-size: 2em; padding: 16px 20px 16px 20px;}
         }
+        #boton-musica {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    padding: 10px 20px;
+    background-color: #32CD32;
+    border: none;
+    color: white;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    transition: background-color 0.3s;
+}
+
+#boton-musica:hover {
+    background-color: #228B22;
+}
+
     </style>
 </head>
 <body>
@@ -286,6 +306,8 @@
         <span id="score">Puntos: 0</span>
         <span id="lives"></span>
     </div>
+    <audio id="musica" src="minigames/musica.mp3" loop></audio>
+<button id="boton-musica">🔊 Música</button>
     <div class="power-indicator" id="powerIndicator"></div>
     <div class="combo-indicator" id="comboIndicator"></div>
     <div id="gameOver">
@@ -1140,4 +1162,19 @@ renderHUD();
 draw();
 nextObstacle = nextBonus = nextEscopeta = nextPowerUp = performance.now();
 loop();
+
+const musica = document.getElementById('musica');
+const botonMusica = document.getElementById('boton-musica');
+let musicaEncendida = false;
+
+botonMusica.addEventListener('click', () => {
+    if (musicaEncendida) {
+        musica.pause();
+        botonMusica.textContent = '🔇 Música';
+    } else {
+        musica.play();
+        botonMusica.textContent = '🔊 Música';
+    }
+    musicaEncendida = !musicaEncendida;
+});
 </script>
